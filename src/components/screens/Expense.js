@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import { ImageBackground} from "react-native";
+import { ImageBackground } from "react-native";
 import bgImage from '../../../assets/background.jpg';
 import { Container, Header, Content, List, ListItem, Text } from 'native-base';
-class Expense extends Component { render() { return (
+class Expense extends Component {
+  render() {
+    return (
       <Container>
-        <ImageBackground source={ bgImage } style={{ width: '100%', height: '100%' }}>
-        <Header transparent style={{ marginTop: 20 }}>
-          <Body style={{ marginLeft: 9 }}>
-            <Title style={{ fontSize: 35 }}>Daily book</Title>
-          </Body>
-          <Left>
-          <Button transparent onPress={() => alert("Show back panel")}>
-            <Icon name='ios-arrow-back' style={{fontSize: 35, color: '#fff'}} />
-          </Button>
-          </Left>
-          <Right>
-            <Button transparent onPress={() => alert("Show list panel")}>
-              <Icon name='ios-list' style={{fontSize: 35, color: '#fff'}} />
-            </Button>
-            <Button transparent onPress={() => alert("Show more panel")}>
-              <Icon name='more' style={{fontSize: 35, color: '#fff'}} />
-            </Button>
-          </Right>
-        </Header>
+        <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
+          <Header transparent style={{ marginTop: 20 }}>
+            <Body style={{ marginLeft: 9 }}>
+              <Title style={{ fontSize: 35 }}>Daily book</Title>
+            </Body>
+            <Left>
+              <Button transparent onPress={() => alert("Show back panel")}>
+                <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
+              </Button>
+            </Left>
+            <Right>
+              <Button transparent onPress={() => alert("Show list panel")}>
+                <Icon name='ios-list' style={{ fontSize: 35, color: '#fff' }} />
+              </Button>
+              <Button transparent onPress={() => alert("Show more panel")}>
+                <Icon name='more' style={{ fontSize: 35, color: '#fff' }} />
+              </Button>
+            </Right>
+          </Header>
           <Content>
             <List>
               <ListItem itemDivider>
