@@ -54,6 +54,24 @@ const recordBudget = async (data) => {
     }
 };
 
+const recordCategory = async (data) => {
+    try {
+        const realm = await getRealm();
+        realm.write(() => {
+            realm.create('Category', data);
+        });
+        return {
+            status: 1,
+            message: 'Success'
+        }
+    } catch (e) {
+        return {
+            status: 0,
+            message: 'Failed'
+        }
+    }
+};
+
 //Expense Datas
 
 //Returns a Expense
