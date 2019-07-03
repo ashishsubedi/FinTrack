@@ -8,7 +8,7 @@ import { Income } from './src/components/screens';
 export default class App extends Component {
   render(){
     return (
-        <Stats />
+        <Home />
     )
   }
 }
