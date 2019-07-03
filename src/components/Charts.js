@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 /**CHANGE MAY BE REQUIRED*/
 
-/**ColorScaleOur length should be more than the length of month*/
+/**ColorScaleOur length should be more than the length of monthlySpent and monthlyIncome*/
 const colorScaleOur=['#d7dbdd','#aed6f1','#f7dc6f','#76d7c4','#DAF7A6','#f5b7b1','#d7bde2','#eb984e']
 
 
@@ -27,7 +27,7 @@ const colorScaleOur=['#d7dbdd','#aed6f1','#f7dc6f','#76d7c4','#DAF7A6','#f5b7b1'
 /**Add data in month variable from back end in similar pattern i.e as a dictionary.
  *  x variable stores category and y variable stores the monthly expenditure in that particular category */
 
-const month=[
+const monthlySpent=[
   { x: "Clothes",y: 3000},
   { x: "Food", y: 4000},
   { x: "Tax", y: 200},
@@ -36,13 +36,27 @@ const month=[
   { x: "Mobile", y: 100}
 ]
 
+/**CHANGE REQUIRED*/
+
+/**Add data in month variable from back end in similar pattern i.e as a dictionary.
+ *  x variable stores category and y variable stores the monthly expenditure in that particular category */
+const monthlyIncome=[
+  { x: "Salary",y: 30000},
+  { x: "Rent", y: 20000}
+]
+
 
 /**NO CHANGE is required in this section*/
 
-const legenddata=[]
-for(i=0;i<month.length;i++)
+const legenddataspent=[]
+for(i=0;i<monthlySpent.length;i++)
 {
-legenddata.push({name:month[i].x+'(Rs.'+month[i].y+')',symbol:{fill:colorScaleOur[i]}})};
+legenddataspent.push({name:monthlySpent[i].x+'(Rs.'+monthlySpent[i].y+')',symbol:{fill:colorScaleOur[i]}})};
+const legenddataincome=[]
+for(i=0;i<monthlyIncome.length;i++)
+{
+legenddataincome.push({name:monthlyIncome[i].x+'(Rs.'+monthlySpent[i].y+')',symbol:{fill:colorScaleOur[i]}})};
+
 
 
 /**CHANGE REQUIRED*/
@@ -53,7 +67,7 @@ legenddata.push({name:month[i].x+'(Rs.'+month[i].y+')',symbol:{fill:colorScaleOu
  * expenditure refers to the total expenditure in that particular day.
  */
 
-const data =[
+const weeklyData =[
     {day: 1, expenditure: 130},
     {day: 2, expenditure: 165},
     {day: 3, expenditure: 142},
@@ -65,17 +79,17 @@ const data =[
 
 
 
-/**This is the component to export monthly chart which is in PIE format */
+/**This is the component to export monthly expenditure chart which is in PIE format */
 
 
 /**NO CHANGE is required here , given that the data in the above variable is stored accordingly i.e in list of dictionary with same key. */
-export class Monthly extends Component{
+export class MonthlySpentChart extends Component{
     render(){
         return(
             <View style={styles.ViewCss}>
                                         <VictoryPie
                                           colorScale={colorScaleOur}
-                                          data={month}
+                                          data={monthlySpent}
                                           labels={(d) => ``}
                                           
                                         />
@@ -87,13 +101,16 @@ export class Monthly extends Component{
                                             orientation="horizontal"
                                             style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
                                             
-                                            data={legenddata}
+                                            data={legenddataspent}
                                           />
             </View>
         )
     }
 }
 
+
+
+/**This is the component to export weekly expenditure chart which is in BAR format */
 
 /**NO CHANGE is required here , given that the data in the above variable is stored accordingly i.e in list of dictionary with same key. */
 
@@ -124,9 +141,9 @@ export class Weekly extends Component{
                                                 labelComponent={<VictoryLabel dy={15} dx={-50}  alignment="start" angle={270}/>}
                                                                                 
                                                 animate={{ duration: 1000, onLoad: { duration: 1000 },delay:500 }}                           
-                                                style={{labels:{fill:"black" ,fontSize: 13, fontWeight: "bold"},data: {fill:"#89cff0",width:18}}}
+                                                style={{labels:{fill:"black" ,fontSize: 13},data: {fill:"#89cff0",width:18}}}
 
-                                                data={data}
+                                                data={weeklyData}
 
                                                 labels={(d)=>`Rs.${d.expenditure}`}
                                                 
@@ -138,3 +155,35 @@ export class Weekly extends Component{
        )
       }
   }
+
+
+/**This is the component to export monthly income chart which is in PIE format */
+
+
+/**NO CHANGE is required here , given that the data in the above variable is stored accordingly i.e in list of dictionary with same key. */
+
+
+  export class MonthlyIncomeChart extends Component{
+    render(){
+        return(
+            <View style={styles.ViewCss}>
+                                        <VictoryPie
+                                          colorScale={colorScaleOur}
+                                          data={monthlyIncome}
+                                          labels={(d) => ``}
+                                          
+                                        />
+                                         <VictoryLegend x={5} 
+                                            itemsPerRow={2}
+                                            title="Legend"
+                                            centerTitle
+                                            
+                                            orientation="horizontal"
+                                            style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
+                                            
+                                            data={legenddataincome}
+                                          />
+            </View>
+        )
+    }
+}
