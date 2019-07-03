@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {View,StyleSheet} from 'react-native';
 import { VictoryBar,VictoryChart,VictoryAxis ,VictoryTheme,VictoryLabel,VictoryContainer,VictoryPie,VictoryLegend} from "victory-native";
 
+
+
 const styles = StyleSheet.create({
   ViewCss: {
     padding:10 
@@ -10,22 +12,46 @@ const styles = StyleSheet.create({
     width:200
   }
 });
+
+
+
+/**CHANGE MAY BE REQUIRED*/
+
+/**ColorScaleOur length should be more than the length of month*/
 const colorScaleOur=['#d7dbdd','#aed6f1','#f7dc6f','#76d7c4','#DAF7A6','#f5b7b1','#d7bde2','#eb984e']
 
+
+
+/**CHANGE REQUIRED*/
+
+/**Add data in month variable from back end in similar pattern i.e as a dictionary.
+ *  x variable stores category and y variable stores the monthly expenditure in that particular category */
+
 const month=[
-  { x: "Clothes",y: 3000,labels:1},
-  { x: "Food", y: 4000,labels:2 },
-  { x: "Tax", y: 200,labels:3},
-  { x: "Transportation", y: 2500,labels:4 },
-  { x: "Travel", y: 400,labels:5 },
-  { x: "Mobile", y: 100,labels:6 }
+  { x: "Clothes",y: 3000},
+  { x: "Food", y: 4000},
+  { x: "Tax", y: 200},
+  { x: "Transportation", y: 2500},
+  { x: "Travel", y: 400},
+  { x: "Mobile", y: 100}
 ]
 
-const legenddata=[]
 
+/**NO CHANGE is required in this section*/
+
+const legenddata=[]
 for(i=0;i<month.length;i++)
 {
 legenddata.push({name:month[i].x+'(Rs.'+month[i].y+')',symbol:{fill:colorScaleOur[i]}})};
+
+
+/**CHANGE REQUIRED*/
+
+/**DATA SHOULD BE ADDED FROM DATABASE IN SIMILAR PATTERN
+ * Here data stores the information on weekly basis. 
+ * day 1 refers to sunday, day 2 refers to monday and so on accordinly.
+ * expenditure refers to the total expenditure in that particular day.
+ */
 
 const data =[
     {day: 1, expenditure: 130},
@@ -36,6 +62,13 @@ const data =[
     {day: 6, expenditure: 190},
     {day: 7, expenditure: 190},
   ] ;
+
+
+
+/**This is the component to export monthly chart which is in PIE format */
+
+
+/**NO CHANGE is required here , given that the data in the above variable is stored accordingly i.e in list of dictionary with same key. */
 export class Monthly extends Component{
     render(){
         return(
@@ -47,7 +80,7 @@ export class Monthly extends Component{
                                           
                                         />
                                          <VictoryLegend x={5} 
-                                          itemsPerRow={2}
+                                            itemsPerRow={2}
                                             title="Legend"
                                             centerTitle
                                             
@@ -61,25 +94,26 @@ export class Monthly extends Component{
     }
 }
 
+
+/**NO CHANGE is required here , given that the data in the above variable is stored accordingly i.e in list of dictionary with same key. */
+
 export class Weekly extends Component{
   render(){
       return(
           <View style={styles.ViewCss}>
 
-<VictoryChart  theme={VictoryTheme.material}  
-                            
-                            >
-                              <VictoryContainer  style={styles.BarCSS}>
+                    <VictoryChart  theme={VictoryTheme.material} >
+                         <VictoryContainer  style={styles.BarCSS}>
                                 <VictoryAxis
                                                 tickValues={[0,1,2,3,4,5,6]}
                                                 tickFormat={["  Sun", "  Mon", "  Tue", "  Wed",'  thur','  Fri','  Sat']}
-                                        />
+                                 />
                                         
-                                        <VictoryAxis
-          dependentAxis
-          // tickFormat specifies how ticks should be displayed
-          tickFormat={(d) => (` `)}
-        />
+                                 <VictoryAxis
+                                                 dependentAxis
+          
+                                                 tickFormat={(d) => (` `)}
+                                   />
                                 <VictoryBar  
                                                 
                                                 alignment="start"
@@ -98,12 +132,9 @@ export class Weekly extends Component{
                                                 
                                 
                                 />
-                          </VictoryContainer>
-                          
-                            
-                        
-                         </VictoryChart>
-                               </View>
-                               )
-                           }
-                       }
+                           </VictoryContainer>
+                     </VictoryChart>
+           </View>
+       )
+      }
+  }
