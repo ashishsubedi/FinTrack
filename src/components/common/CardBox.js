@@ -22,7 +22,7 @@ export default class CardBox extends React.Component {
         {data.map(item => (
           <CardInfo onPress={item.onPress} currency={item.currency}
             title={item.title}
-            textNote={item.title}
+            textNote={item.textNote}
             amount={item.amount}
             date={item.date}
             key={item.id}

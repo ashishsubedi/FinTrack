@@ -1,45 +1,58 @@
 import React, { Component } from 'react';
 import { ImageBackground } from "react-native";
 import bgImage from '../../../assets/background.jpg';
-import { Container, Header, Content, List, ListItem, Text } from 'native-base';
+import {
+  Container,
+  List,
+  ListItem,
+  TextContainer,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Text,
+  Body,
+  Left,
+  Right,
+  Button,
+  Title,
+  Icon
+} from 'native-base';
+
+import CardInfo from '../common/CardInfo';
 class Expense extends Component {
   render() {
+    const { data } = this.props;
     return (
       <Container>
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
           <Header transparent style={{ marginTop: 20 }}>
-            <Body style={{ marginLeft: 9 }}>
-              <Title style={{ fontSize: 35 }}>Daily book</Title>
-            </Body>
             <Left>
               <Button transparent onPress={() => alert("Show back panel")}>
                 <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
               </Button>
             </Left>
-            <Right>
-              <Button transparent onPress={() => alert("Show list panel")}>
-                <Icon name='ios-list' style={{ fontSize: 35, color: '#fff' }} />
-              </Button>
-              <Button transparent onPress={() => alert("Show more panel")}>
-                <Icon name='more' style={{ fontSize: 35, color: '#fff' }} />
-              </Button>
-            </Right>
+            <Body style={{ marginLeft: 9 }}>
+              <Title style={{ fontSize: 35 }}>Expense</Title>
+            </Body>
+
           </Header>
           <Content>
-            <List>
-              <ListItem itemDivider>
-                <Text>2 transactions in total</Text>
-              </ListItem>
-              <ListItem>
-                <Text>Total Income</Text>
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>Jun 13</Text>
-              </ListItem>
-              <ListItem>
-                <Text>Wage</Text>
-                <Text note>Income</Text>
-              </ListItem>
+            <List style={{ marginTop: 10, fontSize: 18 }}>
+              {
+                data.map((item) =>
+                  (
+                    <CardInfo
+                      key={item.id}
+                      title={item.title}
+                      textNote={item.category}
+                      amount={item.amount}
+                      currency={item.currency}
+                      date={item.date}
+                    />
+                  )
+                )
+              }
             </List>
           </Content>
         </ImageBackground>

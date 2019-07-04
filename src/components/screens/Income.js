@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { ImageBackground } from "react-native";
+import bgImage from '../../../assets/background.jpg';
 import {
   Container,
   List,
@@ -16,10 +18,11 @@ import {
   Title,
   Icon
 } from 'native-base';
-import { ImageBackground } from "react-native";
-import bgImage from '../../../assets/background.jpg';
+
+import CardInfo from '../common/CardInfo';
 class Income extends Component {
   render() {
+    const { data } = this.props;
     return (
       <Container>
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
@@ -29,52 +32,32 @@ class Income extends Component {
                 <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
               </Button>
             </Left>
-            <Body style={{ marginLeft: 4 }}>
+            <Body style={{ marginLeft: 9 }}>
               <Title style={{ fontSize: 35 }}>Income</Title>
             </Body>
             <Right>
-              <Button transparent onPress={() => alert("Show delete panel")}>
-                <Icon name='trash' style={{ fontSize: 35, color: '#fff' }} />
+              <Button transparent onPress={() => alert("Show search panel")}>
+                <Icon name='search' style={{ fontSize: 35, color: '#fff' }} />
               </Button>
             </Right>
           </Header>
           <Content>
-            <Card noShadow={true}>
-              <List style={{ marginTop: 10, fontSize: 18 }}>
-                <ListItem>
-                  <Text>Category</Text>
-                  <Text>Wage</Text>
-                </ListItem>
-                <ListItem>
-                  <Text note>Account</Text>
-                  <Text>No account</Text>
-                </ListItem>
-                <ListItem>
-                  <Text note>Date</Text>
-                  <Text> Jun 11 Thu</Text>
-                </ListItem>
-                <ListItem>
-                  <Text note>Time</Text>
-                  <Text>18:13</Text>
-                </ListItem>
-                <ListItem style={{ color: '#ccc' }}>
-                  <Text note>Note</Text>
-                  <Text>Tap to add note</Text>
-                </ListItem>
-                <ListItem style={{ color: '#ccc' }}>
-                  <Text note>Project</Text>
-                  <Text>Tap to add Project</Text>
-                </ListItem>
-                <ListItem style={{ color: '#ccc' }}>
-                  <Text note>Merchant</Text>
-                  <Text>Tap to add Merchant</Text>
-                </ListItem>
-                <ListItem style={{ color: '#ccc' }}>
-                  <Text note>Label</Text>
-                  <Text>Tap to add label</Text>
-                </ListItem>
-              </List>
-            </Card>
+            <List style={{ marginTop: 10, fontSize: 18 }}>
+              {
+                data.map((item) =>
+                  (
+                    <CardInfo
+                      key={item.id}
+                      title={item.title}
+                      textNote={item.category}
+                      amount={item.amount}
+                      currency={item.currency}
+                      date={item.date}
+                    />
+                  )
+                )
+              }
+            </List>
           </Content>
         </ImageBackground>
       </Container>

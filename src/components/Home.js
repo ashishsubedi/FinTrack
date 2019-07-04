@@ -25,9 +25,18 @@ class Home extends Component {
     super(props);
     //Get count and data from database and set it to that
 
+    
     this.state = {
 
       //MOCK DATA.. USE DATABASE TO FETCH DATA  
+      userInfo:[{
+        id:0,
+        amount: 1000,
+        currency: "Rs.",
+        title: "Net Balance",
+        textNote: '',
+        date:Date.now()
+      }],
       income: [
         {
           id: 0,
@@ -126,6 +135,10 @@ class Home extends Component {
             </Right>
           </Header>
           <Content padder>
+            <CardBox header="Net Balance"
+              onPress={() => alert("Pressed")}
+              data={this.state.userInfo}
+            />
             <CardBox header="Expenses"
               onPress={() => alert("Pressed")}
               data={this.state.expense < 3 ? this.state.expense : this.state.expense.slice(0, 3)} />
