@@ -20,22 +20,22 @@ import {
   Icon,
   Fab
 } from "native-base";
-class Home extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
     //Get count and data from database and set it to that
 
-    
+
     this.state = {
 
       //MOCK DATA.. USE DATABASE TO FETCH DATA  
-      userInfo:[{
-        id:0,
+      userInfo: [{
+        id: 0,
         amount: 1000,
         currency: "Rs.",
         title: "Net Balance",
         textNote: '',
-        date:Date.now()
+        date: Date.now()
       }],
       income: [
         {
@@ -140,18 +140,18 @@ class Home extends Component {
               data={this.state.userInfo}
             />
             <CardBox header="Expenses"
-              onPress={() => alert("Pressed")}
+              onPress={() => { this.props.navigation.navigate('Expense'); }}
               data={this.state.expense < 3 ? this.state.expense : this.state.expense.slice(0, 3)} />
 
             <CardBox header="Income"
-              onPress={() => alert("Pressed")}
+              onPress={() => this.props.navigation.navigate('Income') }
               data={this.state.income < 3 ? this.state.income : this.state.income.slice(0, 3)} />
 
           </Content>
           <Fab
             style={{ backgroundColor: 'blue', marginBottom: 20 }}
             position="bottomRight"
-            onPress={() => alert("Show input panel")}>
+            onPress={() => this.props.navigation.navigate('AddTransactions')}>
             <Icon ios='ios-add' android="md-add" style={{ fontSize: 35, color: '#fff' }} />
           </Fab>
         </ImageBackground>
@@ -160,4 +160,3 @@ class Home extends Component {
   }
 }
 
-export { Home };

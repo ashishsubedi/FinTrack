@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 // import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-import { Home, Stats, Profile, Budget } from './src/components';
-import { Income, Expense, AddTransactions } from './src/components/screens';
+//import { Home, Stats, Profile, Budget } from './src/components';
+import Home from './src/components/Home'
+import Stats from './src/components/Stats'
+import Profile from './src/components/Profile'
+import Budget from './src/components/Budget'
+import Income from './src/components/screens/Income'
+import Expense from './src/components/screens/Expense'
+import AddTransactions from './src/components/screens/AddTransactions'
+//import { Income, Expense, AddTransactions } from './src/components/screens';
 // import { MonthlyIncomeChart, MonthlySpentChart } from './src/components/Charts'
 
 
@@ -118,29 +125,55 @@ export default class App extends Component {
   }
 }
 
-const TabNavigator = createBottomTabNavigator({
-  Home: HomeStackNavigator,
-  Stats: StatsStackNavigator,
-  Budget: BudgetStackNavigator,
-  Profile: ProfileStackNavigator,
-});
+
 
 const HomeStackNavigator = createStackNavigator({
   Home,
   Income,
   Expense,
   AddTransactions
-});
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
+  });
 
 const StatsStackNavigator = createStackNavigator({
   Stats,
-});
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
+  });
 
 const BudgetStackNavigator = createStackNavigator({
   Budget,
-});
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
+  });
 const ProfileStackNavigator = createStackNavigator({
   Profile,
-});
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
+  });
+const TabNavigator = createBottomTabNavigator({
+  Home: HomeStackNavigator,
+  Stats: StatsStackNavigator,
+  Budget: BudgetStackNavigator,
+  Profile: ProfileStackNavigator
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
+  });
 
 const AppContainer = createAppContainer(TabNavigator);

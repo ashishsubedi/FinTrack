@@ -20,7 +20,7 @@ import {
 } from 'native-base';
 
 import CardInfo from '../common/CardInfo';
-class Income extends Component {
+export default class Income extends Component {
   render() {
     const { data } = this.props;
     return (
@@ -65,4 +65,3 @@ class Income extends Component {
   }
 }
 
-export { Income };

@@ -4,14 +4,6 @@ import { Container, Header, Content, Icon, Picker, Form } from "native-base";
 class PickerIcon extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selected: "key0"
-        };
-    }
-    onValueChange(value) {
-        this.setState({
-            selected: value
-        });
     }
     render() {
 
@@ -22,8 +14,8 @@ class PickerIcon extends Component {
                     iosHeader="Select your Category"
                     iosIcon={<Icon name="arrow-down" />}
                     style={{ width: undefined }}
-                    selectedValue={this.state.selected}
-                    onValueChange={this.onValueChange.bind(this)}
+                    selectedValue={this.props.selected}
+                    onValueChange={this.props.onValueChange}
                 >
                     {this.props.pickerItems.map((item) => (
                         <Picker.Item key={item.id} label={item.label} value={item.value} />

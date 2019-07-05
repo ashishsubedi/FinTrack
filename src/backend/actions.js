@@ -1,6 +1,5 @@
 import { getExpenses, recordExpense, getIncomes, recordIncome, recordBudget } from './helpers';
 
-Actions = () => {
     const addExpense = ({ value, amount }) => {
         const last = getExpenses()[0];
         const highestId = last == null ? 0 : last.id;
@@ -53,7 +52,7 @@ Actions = () => {
         recordCategory(data);
     };
 
-    
-}
 
-export default Actions;
+export {
+    addExpense,addIncome,addBudget,addCategory
+};
