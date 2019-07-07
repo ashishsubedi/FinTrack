@@ -15,6 +15,9 @@ import {
   Title,
   Icon
 } from "native-base";
+
+import { CategoryIncomeChart, CategorySpentChart, Weekly } from './Charts'
+
 export default class Stats extends Component {
   render() {
     return (
@@ -37,6 +40,10 @@ export default class Stats extends Component {
                   </Body>
                 </Left>
               </CardItem>
+              {/* Daily Trend DATA
+              
+              
+              */}
             </Card>
             <Card noShadow={true} >
               <CardItem button onPress={() => alert("Show Week expense panel")}>
@@ -47,7 +54,10 @@ export default class Stats extends Component {
                     <Text note>View weekly spend report </Text>
                   </Body>
                 </Left>
+
               </CardItem>
+              <Weekly />
+
             </Card>
             <Card noShadow={true} >
               <CardItem button onPress={() => alert("Show monthly category stats panel")}>
@@ -59,6 +69,7 @@ export default class Stats extends Component {
                   </Body>
                 </Left>
               </CardItem>
+              <CategorySpentChart/>
             </Card>
             <Card noShadow={true} >
               <CardItem button onPress={() => alert("Show Annual Category Stats panel")}>

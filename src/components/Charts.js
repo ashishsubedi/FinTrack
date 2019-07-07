@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 /**CHANGE MAY BE REQUIRED*/
 
-/**ColorScaleOur length should be more than the length of monthlySpent and monthlyIncome*/
+/**ColorScaleOur length should be more than the length of CategorySpent and CategoryIncome*/
 const colorScaleOur = ['#d7dbdd', '#aed6f1', '#f7dc6f', '#76d7c4', '#DAF7A6', '#f5b7b1', '#d7bde2', '#eb984e']
 
 
@@ -27,7 +27,7 @@ const colorScaleOur = ['#d7dbdd', '#aed6f1', '#f7dc6f', '#76d7c4', '#DAF7A6', '#
 /**Add data in month variable from back end in similar pattern i.e as a dictionary.
  *  x variable stores category and y variable stores the monthly expenditure in that particular category */
 
-const monthlySpent = [
+const CategorySpent = [
   { x: "Clothes", y: 3000 },
   { x: "Food", y: 4000 },
   { x: "Tax", y: 200 },
@@ -40,7 +40,7 @@ const monthlySpent = [
 
 /**Add data in month variable from back end in similar pattern i.e as a dictionary.
  *  x variable stores category and y variable stores the monthly expenditure in that particular category */
-const monthlyIncome = [
+const CategoryIncome = [
   { x: "Salary", y: 30000 },
   { x: "Rent", y: 20000 }
 ]
@@ -49,13 +49,14 @@ const monthlyIncome = [
 /**NO CHANGE is required in this section*/
 
 const legenddataspent = []
-for (i = 0; i < monthlySpent.length; i++) {
-  legenddataspent.push({ name: monthlySpent[i].x + '(Rs.' + monthlySpent[i].y + ')', symbol: { fill: colorScaleOur[i] } })
+for (i = 0; i < CategorySpent.length; i++) {
+  legenddataspent.push({ name: CategorySpent[i].x + '(Rs.' + CategorySpent[i].y + ')', symbol: { fill: colorScaleOur[i] } })
 };
 const legenddataincome = []
-for (i = 0; i < monthlyIncome.length; i++) {
-  legenddataincome.push({ name: monthlyIncome[i].x + '(Rs.' + monthlySpent[i].y + ')', symbol: { fill: colorScaleOur[i] } })
+for (i = 0; i < CategoryIncome.length; i++) {
+  legenddataincome.push({ name: CategoryIncome[i].x + '(Rs.' + CategoryIncome[i].y + ')', symbol: { fill: colorScaleOur[i] } })
 };
+
 
 
 
@@ -63,6 +64,8 @@ for (i = 0; i < monthlyIncome.length; i++) {
 
 /**DATA SHOULD BE ADDED FROM DATABASE IN SIMILAR PATTERN
  * Here data stores the information on weekly basis. 
+ * 
+
  * day 1 refers to sunday, day 2 refers to monday and so on accordinly.
  * expenditure refers to the total expenditure in that particular day.
  */
@@ -76,6 +79,11 @@ const weeklyData = [
   { day: 6, expenditure: 190 },
   { day: 7, expenditure: 190 },
 ];
+const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+const legenddata = []
+for (i = 0; i < weeklyData.length; i++) {
+  legenddata.push({ name: days[i] + '(Rs.' + weeklyData[i].expenditure + ')' ,symbol: { fill: colorScaleOur[1] }})
+};
 
 
 
@@ -83,13 +91,13 @@ const weeklyData = [
 
 
 /**NO CHANGE is required here , given that the data in the above variable is stored accordingly i.e in list of dictionary with same key. */
-export class MonthlySpentChart extends Component {
+export class CategorySpentChart extends Component {
   render() {
     return (
       <View style={styles.ViewCss}>
         <VictoryPie
           colorScale={colorScaleOur}
-          data={monthlySpent}
+          data={CategorySpent}
           labels={(d) => ``}
 
         />
@@ -123,34 +131,42 @@ export class Weekly extends Component {
           <VictoryContainer style={styles.BarCSS}>
             <VictoryAxis
               tickValues={[0, 1, 2, 3, 4, 5, 6]}
-              tickFormat={["  Sun", "  Mon", "  Tue", "  Wed", '  thur', '  Fri', '  Sat']}
+              tickFormat={["  Sun", "  Mon", "  Tue", "  Wed", '  Thur', '  Fri', '  Sat']}
             />
 
             <VictoryAxis
               dependentAxis
-
-              tickFormat={(d) => (` `)}
+              tickValues={[0, 1, 2]}
+              tickFormat={[1,0.5,0]}
             />
             <VictoryBar
-
+              y={0}
               alignment="start"
               cornerRadius={{ top: 5 }}
 
               x="day"
               y="expenditure"
-              labelComponent={<VictoryLabel dy={15} dx={-50} alignment="start" angle={270} />}
-
-              animate={{ duration: 1000, onLoad: { duration: 1000 }, delay: 500 }}
-              style={{ labels: { fill: "black", fontSize: 13 }, data: { fill: "#89cff0", width: 18 } }}
-
+              
+              
+              style={{ data: { fill: "#89cff0", width: 18 } }}
               data={weeklyData}
 
-              labels={(d) => `Rs.${d.expenditure}`}
+             
 
 
             />
+        
+      
+      
           </VictoryContainer>
         </VictoryChart>
+        <VictoryLegend x={80} y={0}
+          itemsPerRow={1}         
+          orientation="horizontal"
+          style={{ data: { fontSize:30 } }}
+
+          data={legenddata}
+        />
       </View>
     )
   }
@@ -163,13 +179,13 @@ export class Weekly extends Component {
 /**NO CHANGE is required here , given that the data in the above variable is stored accordingly i.e in list of dictionary with same key. */
 
 
-export class MonthlyIncomeChart extends Component {
+export class CategoryIncomeChart extends Component {
   render() {
     return (
       <View style={styles.ViewCss}>
         <VictoryPie
           colorScale={colorScaleOur}
-          data={monthlyIncome}
+          data={CategoryIncome}
           labels={(d) => ``}
 
         />

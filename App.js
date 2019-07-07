@@ -9,11 +9,14 @@ import Income from './src/components/screens/Income'
 import Expense from './src/components/screens/Expense'
 import AddTransactions from './src/components/screens/AddTransactions'
 //import { Income, Expense, AddTransactions } from './src/components/screens';
-// import { MonthlyIncomeChart, MonthlySpentChart } from './src/components/Charts'
+import { CategoryIncomeChart, CategorySpentChart, Weekly } from './src/components/Charts'
+import ChartDetails from './src/components/screens/ChartDeatils'
 
 
 //React navigation
 import { createAppContainer, createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+
+
 
 
 
@@ -120,7 +123,7 @@ export default class App extends Component {
   render() {
 
     return (
-      <AppContainer />
+      <ChartDetails/>
     )
   }
 }
