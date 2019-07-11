@@ -64,17 +64,17 @@ class TransactionTab extends Component {
           label: 'Miscellaneous',
           value: 'miscellaneous',
         },
-      ]
+      ],
       
+
     }
-    
   }
 
-  
 
-  
+
+
   render() {
-    
+
     return (
       <Container>
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
@@ -82,7 +82,10 @@ class TransactionTab extends Component {
             <Card noShadow={true}>
               <List style={{ marginTop: 10, fontSize: 18 }}>
                 <ListItem onPress={() => alert("add transactions to the panel")}>
-                  <Text style={{ fontSize: 24, color: 'red' }}>{this.props.amount}</Text>
+                  {/* <Text style={{ fontSize: 24, color: 'red' }}>{this.props.amount}</Text> */}
+                 
+                    <Input placeholder="Amount" onChangeText={this.props.handleAmount} keyboardType={'number-pad'}   />
+                  
                 </ListItem>
                 <ListItem>
                   <Body>
@@ -91,8 +94,8 @@ class TransactionTab extends Component {
                   </Body>
                 </ListItem>
                 <ListItem onPress={() => {
-                    alert('Works');
-                   
+                  alert('Works');
+
                 }}>
                   <Body>
                     <Text>Account</Text>
@@ -103,13 +106,17 @@ class TransactionTab extends Component {
                   <Body>
                     <Text>Note</Text>
                     <Item>
-                      <Input placeholder="Tap to add note" />
+                      <Input placeholder="Tap to add note" onChangeText={this.props.handleNote} />
                     </Item>
                   </Body>
                 </ListItem>
               </List>
             </Card>
-            <Button block success><Text>SAVE</Text></Button>
+            {/* <Button block success><Text>SAVE</Text></Button> */}
+            {/* <Text>
+              {this.props.note}
+            </Text>
+             */}
           </Content>
         </ImageBackground>
       </Container>

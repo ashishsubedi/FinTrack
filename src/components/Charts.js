@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel, VictoryContainer, VictoryPie, VictoryLegend } from "victory-native";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryLabel, VictoryContainer, VictoryPie, VictoryLegend, VictoryLine, VictoryClipContainer} from "victory-native";
 
 
 
@@ -85,7 +85,24 @@ for (i = 0; i < weeklyData.length; i++) {
   legenddata.push({ name: days[i] + '(Rs.' + weeklyData[i].expenditure + ')' ,symbol: { fill: colorScaleOur[1] }})
 };
 
-
+const MonthlyLineData=[
+  {x:1,y:780},
+  {x:2,y:200},
+  {x:3,y:500},
+  {x:4,y:450},
+  {x:5,y:600},
+  {x:6,y:600},
+  {x:7,y:200},
+  {x:8,y:200},
+  {x:9,y:900},
+  {x:10,y:200},
+  {x:11,y:200},
+  {x:12,y:200},
+  {x:13,y:800},
+  {x:14,y:200},
+  {x:15,y:200},
+  {x:16,y:200}
+]
 
 /**This is the component to export monthly expenditure chart which is in PIE format */
 
@@ -97,7 +114,7 @@ export class CategorySpentChart extends Component {
       <View style={styles.ViewCss}>
         <VictoryPie
           colorScale={colorScaleOur}
-          data={CategorySpent}
+          data={this.props.CategorySpent||CategorySpent}
           labels={(d) => ``}
 
         />
@@ -149,7 +166,7 @@ export class Weekly extends Component {
               
               
               style={{ data: { fill: "#89cff0", width: 18 } }}
-              data={weeklyData}
+              data={this.props.weeklyData||weeklyData}
 
              
 
@@ -165,7 +182,7 @@ export class Weekly extends Component {
           orientation="horizontal"
           style={{ data: { fontSize:30 } }}
 
-          data={legenddata}
+          data={this.props.legenddata||legenddata}
         />
       </View>
     )
@@ -203,3 +220,29 @@ export class CategoryIncomeChart extends Component {
     )
   }
 }
+
+
+
+
+
+
+
+
+export class MonthlyLine extends Component {
+  render() {
+    return (
+      <View style={styles.ViewCss}>
+     <VictoryChart  minDomain={{ y: 0}}  theme={VictoryTheme.material}>
+          <VictoryLine
+          
+           groupComponent={<VictoryClipContainer clipPadding={{ top: 5, right: 10 }}/>}
+           style={{ data: { stroke: "#c43a31", strokeWidth: 1, strokeLinecap: "round" } }}
+            data={MonthlyLineData}
+          />
+      </VictoryChart>
+       
+      </View>
+    )
+  }
+}
+

@@ -4,31 +4,58 @@ import {
   Card,
   CardItem,
   Text,
-  
+  List,
+
 } from "native-base";
+import { View, FlatList } from 'react-native'
 
 import CardInfo from './CardInfo';
+// import console = require("console");
 
 export default class CardBox extends React.Component {
   
 
   render() {
-    const {header, data} = this.props;
+    const { header, data } = this.props;
+
     return (
-      <Card>
+      // <Card>
+      //   <CardItem header bordered>
+      //     <Text>{header}</Text>
+      //   </CardItem>
+
+      //   {data.map(item => (
+      //     <CardInfo onPress={item.onPress} currency='Rs. '
+      //       title={item.title || item.note}
+      //       textNote={item.textNote}
+      //       amount={item.amount}
+      //       date={item.date}
+      //       key={item.id}
+      //     />
+      //   ))}
+      // </Card>
+      <View>
         <CardItem header bordered>
           <Text>{header}</Text>
         </CardItem>
-        {data.map(item => (
-          <CardInfo onPress={item.onPress} currency={item.currency}
-            title={item.title}
-            textNote={item.textNote}
-            amount={item.amount}
-            date={item.date}
-            key={item.id}
+        <List>
+
+          <FlatList
+            data={data}
+            extraData={this.props.state}
+            renderItem={({ item }) =>(
+              <CardInfo onPress={this.props.onPress} currency='Rs. '
+                title={item.title || item.note}
+                textNote={item.textNote}
+                amount={item.amount}
+                date={item.date}
+                key={item.id}
+              />)
+            }
+            keyExtractor={(item, index) => item.id.toString()}
           />
-        ))}
-      </Card>
+        </List>
+      </View>
     );
   }
 }

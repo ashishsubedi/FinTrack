@@ -5,7 +5,7 @@ export default class PredictionSchema{
         properties:{
             id: 'int',
             time : 'date',
-            amount : {type: 'int', default: 0}
+            amount : {type: 'float', default: 0}
         }
     };
 }

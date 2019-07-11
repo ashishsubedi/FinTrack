@@ -1,21 +1,19 @@
 import getRealm from '../services/realm';
+// import console = require('console');
+// import console = require('console');
 
 
 const recordExpense = async (data) => {
     try {
         const realm = await getRealm();
         realm.write(() => {
-            realm.create('Expense', data);
+            realm.create('Expense', data, true);
         });
-        return {
-            status: 1,
-            message: 'Success'
-        }
+        return realm;
+        
     } catch (e) {
-        return {
-            status: 0,
-            message: 'Failed'
-        }
+        throw new Error('Record Expense Error: ',e,'  End');
+        
     }
 };
 
@@ -23,34 +21,26 @@ const recordIncome = async (data) => {
     try {
         const realm = await getRealm();
         realm.write(() => {
-            realm.create('Income', data);
+            realm.create('Income', data, true);
         });
-        return {
-            status: 1,
-            message: 'Success'
-        }
+        return realm;
+
     } catch (e) {
-        return {
-            status: 0,
-            message: 'Failed'
-        }
+        throw new Error('Error');
+        
     }
 };
 const recordBudget = async (data) => {
     try {
         const realm = await getRealm();
         realm.write(() => {
-            realm.create('Budget', data);
+            realm.create('Budget', data, true);
         });
-        return {
-            status: 1,
-            message: 'Success'
-        }
+        return realm;
+
     } catch (e) {
-        return {
-            status: 0,
-            message: 'Failed'
-        }
+        throw new Error('Error');
+        
     }
 };
 
@@ -58,31 +48,55 @@ const recordCategory = async (data) => {
     try {
         const realm = await getRealm();
         realm.write(() => {
-            realm.create('Category', data);
+            realm.create('Category', data, true);
         });
-        return {
-            status: 1,
-            message: 'Success'
-        }
+        return realm;
+        
     } catch (e) {
-        return {
-            status: 0,
-            message: 'Failed'
-        }
+        throw new Error('Error');
+        
     }
 };
 
+
+const getCategoriesCount = async ()=>{
+
+    try {
+        const realm = await getRealm();
+        return realm.objects('Category').length;
+        
+       
+        
+    } catch (e) {
+        throw new Error('Categories Count Error');
+        
+    }
+}
+
+const getCategoryByValue =  async (value) =>{
+    try{
+        const realm = await getRealm();
+        
+        const res =  realm.objects('Category').filtered('name == $0',value);
+       
+        return res[0];
+    }
+    catch (e) {
+        throw new Error('Error');
+    }
+}
 //Expense Datas
 
 //Returns a Expense
 
-const getExpenses = async (id) => {
+const getExpenses = async () => {
     try {
         const realm = await getRealm();
         return realm.objects('Expense').sorted('date',true);
 
     } catch (e) {
-        throw new Error('Error');
+        throw new Error('Get Expense Error');
+        
     }
 };
 
@@ -245,8 +259,10 @@ const getBudget = async (date) => {
     }
 };
 
+
+
 export {
-    recordExpense, recordBudget, recordIncome,
+    recordExpense, recordBudget, recordIncome, getCategoriesCount, recordCategory,getCategoryByValue,
     getExpenseById, getExpenseByAmount, getExpenseByCategory, getExpenseByDate, getExpenseByHighestAmount,
     getIncomeById, getIncomeByAmount, getIncomeByCategory, getIncomeByDate, getIncomeByHighestAmount,
     getBudget, getExpenses, getIncomes

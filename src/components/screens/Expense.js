@@ -19,10 +19,20 @@ import {
   Icon
 } from 'native-base';
 
+import { View, FlatList } from 'react-native'
+
 import CardInfo from '../common/CardInfo';
+import moment from 'moment'
+// import console = require('console');
 export default class Expense extends Component {
   render() {
-    const { data } = this.props;
+    let data = this.props.navigation.getParam('data', [{
+      title: 'No Item Found',
+      id: 0, textNote: '',
+      date: moment().format()
+    }]);
+    
+    console.log("DATA TYPE:",typeof(data));
     return (
       <Container>
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
@@ -38,7 +48,7 @@ export default class Expense extends Component {
 
           </Header>
           <Content>
-            <List style={{ marginTop: 10, fontSize: 18 }}>
+            {/* <List style={{ marginTop: 10, fontSize: 18 }}>
               {
                 data.map((item) =>
                   (
@@ -53,6 +63,25 @@ export default class Expense extends Component {
                   )
                 )
               }
+            </List> */}
+
+            <List>
+              {console.log("DATA:", data)}
+
+              <FlatList
+                data={data}
+                renderItem={({ item }) => (
+                  <CardInfo
+                    key={item.id}
+                    title={item.title}
+                    textNote={item.category}
+                    amount={item.amount}
+                    currency={item.currency}
+                    date={item.date}
+                  />)
+                }
+                keyExtractor={(item, index) => item.id.toString()}
+              />
             </List>
           </Content>
         </ImageBackground>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ImageBackground } from "react-native";
-import { CategoryIncomeChart, CategorySpentChart, Weekly } from './src/components/Charts'
+import { CategoryIncomeChart, CategorySpentChart, Weekly } from '../Charts'
 
 
 import {

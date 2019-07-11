@@ -5,7 +5,7 @@ export default class UserSchema{
         properties:{
             id: 'int',
             name : 'string',
-            balance: {type: 'int', default: 0}
+            balance: {type: 'float', default: 0}
         }
     };
 }
