@@ -3,7 +3,7 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Left, Right, Butt
 
 import TransactionTab from './TransactionTab';
 
-import { addExpense } from '../../backend/actions'
+import { addExpense, addIncome } from '../../backend/actions'
 // import console = require('console');
 // import console = require('console');
 
@@ -36,12 +36,12 @@ export default class AddTransactions extends Component {
   }
 
   render() {
-
+    let state = this.props.navigation.getParam('state', {})
     return (
       <Container>
         <Header style={{ marginTop: 20 }}>
           <Left>
-            <Button transparent onPress={() => alert("Show back panel")}>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
               <Icon name='arrow-back' style={{ fontSize: 35, color: '#fff' }} />
             </Button>
           </Left>
@@ -51,12 +51,6 @@ export default class AddTransactions extends Component {
           <Right>
             <Button transparent onPress={async () => {
               alert("add transactions to the panel");
-              const data = await addExpense({
-                value: this.state.selected,
-                amount: this.state.amount,
-                note: this.state.note
-              });
-              this.props.navigation.navigate('Home', data);
             }}>
               <Icon name='checkmark' style={{ fontSize: 35, color: '#fff' }} />
             </Button>
@@ -64,10 +58,28 @@ export default class AddTransactions extends Component {
         </Header>
         <Tabs transparent>
           <Tab heading={<TabHeading><Icon name="logo-usd" /><Text>Expense</Text></TabHeading>}>
-            <TransactionTab amount={this.state.amount} note={this.state.note} selected={this.state.selected} onValueChange={this.onValueChange} handleAmount={this.handleAmount} handleNote={this.handleNote} />
+            <TransactionTab
+              save={async () => {
+                const data = await addExpense({
+                  value: this.state.selected,
+                  amount: this.state.amount,
+                  note: this.state.note
+                });
+                this.props.navigation.navigate('Home');
+              }}
+              amount={this.state.amount} note={this.state.note} selected={this.state.selected} onValueChange={this.onValueChange} handleAmount={this.handleAmount} handleNote={this.handleNote} />
           </Tab>
           <Tab heading={<TabHeading><Icon name="card" /><Text>Income</Text></TabHeading>}>
-            <TransactionTab amount={this.state.amount} note={this.state.note} selected={this.state.selected} onValueChange={this.onValueChange} handleAmount={this.handleAmount} handleNote={this.handleNote} />
+            <TransactionTab
+             save={ async ()=>{
+              const data = await addIncome({
+                value: this.state.selected,
+                amount: this.state.amount,
+                note: this.state.note
+              });
+              this.props.navigation.navigate('Home');
+            }}
+            amount={this.state.amount} note={this.state.note} selected={this.state.selected} onValueChange={this.onValueChange} handleAmount={this.handleAmount} handleNote={this.handleNote} />
           </Tab>
         </Tabs>
       </Container>

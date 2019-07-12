@@ -93,7 +93,7 @@ class TransactionTab extends Component {
                     <PickerIcon pickerItems={this.state.pickerItems} selected={this.props.selected} onValueChange={this.props.onValueChange} />
                   </Body>
                 </ListItem>
-                <ListItem onPress={() => {
+                {/* <ListItem onPress={() => {
                   alert('Works');
 
                 }}>
@@ -101,7 +101,7 @@ class TransactionTab extends Component {
                     <Text>Account</Text>
                     <Text note>No account</Text>
                   </Body>
-                </ListItem>
+                </ListItem> */}
                 <ListItem style={{ color: '#ccc' }} onPress={() => alert("add transactions to the panel")}>
                   <Body>
                     <Text>Note</Text>
@@ -112,7 +112,7 @@ class TransactionTab extends Component {
                 </ListItem>
               </List>
             </Card>
-            {/* <Button block success><Text>SAVE</Text></Button> */}
+            <Button block success onPress={this.props.save}><Text>SAVE</Text></Button>
             {/* <Text>
               {this.props.note}
             </Text>

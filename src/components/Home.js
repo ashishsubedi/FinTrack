@@ -3,9 +3,12 @@ import { ImageBackground } from "react-native";
 import bgImage from '../../assets/background.jpg';
 import { CardSection } from './common/CardSection';
 import CardBox from './common/CardBox';
-import { getExpenses } from '../backend/helpers'
+import { getExpenses, getIncomes } from '../backend/helpers'
 import { StatusBar } from 'react-native';
-// import { CardInfo } from './common/CardInfo';
+import { CardInfo } from './common/CardInfo';
+
+import { View, FlatList } from 'react-native'
+
 
 import { NavigationEvents } from 'react-navigation';
 
@@ -23,7 +26,8 @@ import {
   Button,
   Title,
   Icon,
-  Fab
+  Fab,
+  List
 } from "native-base";
 import getRealm from "../services/realm";
 
@@ -73,9 +77,17 @@ export default class Home extends Component {
   componentWillMount() {
     getRealm().then(async realm => {
       const exp = await getExpenses();
+      const income = await getIncomes();
+      const user = realm.objects('User');
+
+      console.log(user)
       this.setState({
-        expense: [...exp]
+        expense: [...exp],
+        userInfo: [...user],
+        income:[...income]
+
       })
+      console.log('UserData: ', this.state.userInfo);
     })
   }
 
@@ -87,15 +99,17 @@ export default class Home extends Component {
     StatusBar.setHidden(true);
 
   }
-  handleChange = (exp) => {
+  expenseChange = (exp) => {
     this.setState({
       expense: [...this.state.expense, ...exp]
     })
   }
 
   render() {
+    let loaded = 0;
     return (
       <Container>
+        
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
           <Header transparent style={{ marginTop: 20 }}>
             <Body style={{ marginLeft: 9 }}>
@@ -110,22 +124,26 @@ export default class Home extends Component {
               </Button>
             </Right>
           </Header>
+
           <Content padder>
             <CardBox header="Net Balance"
               onPress={() => alert("Pressed")}
               data={this.state.userInfo}
+
             />
             <CardBox header="Expenses"
-              state={this.state}
+              state={this.state.expense}
               onPress={() => {
                 this.props.navigation.navigate('Expense',
-                  {data: Array.from(this.state.expense)});
+                  {data: Array.from(this.state.expense),});
               }}
               data={this.state.expense < 3 ? this.state.expense : this.state.expense.slice(0, 3)}
 
             />
-
+          
             <CardBox header="Income"
+              state={this.state.income}
+
               onPress={() => this.props.navigation.navigate('Income')}
               data={this.state.income < 3 ? this.state.income : this.state.income.slice(0, 3)} />
 
@@ -133,7 +151,9 @@ export default class Home extends Component {
           <Fab
             style={{ backgroundColor: 'blue', marginBottom: 20 }}
             position="bottomRight"
-            onPress={() => this.props.navigation.navigate('AddTransactions')}>
+            onPress={() => this.props.navigation.navigate('AddTransactions',{
+              state:this.state
+            })}>
             <Icon ios='ios-add' android="md-add" style={{ fontSize: 35, color: '#fff' }} />
           </Fab>
         </ImageBackground>

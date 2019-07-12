@@ -31,9 +31,9 @@ import moment from 'moment'
 
         const data = {
             id,
+            note,
             category: category,
             amount: parseFloat(amount),
-            note,
             date : moment().format()
         };
         recordIncome(data);

@@ -147,18 +147,38 @@ export default class App extends Component {
         recordCategory({ id: 5, name: 'study', icon: '' });
         recordCategory({ id: 6, name: 'misceallaneous', icon: '' });
       }
+    }).catch(err => {
+      throw new Error("Category Creation Failed: ", e);
     })
-    
-}
+    getRealm()
+      .then(realm => {
+        const length = realm.objects('User').length;
+        if (length == 0) {
+          const data = {
+            id: 0,
+            name: 'User',
+            balance: 0.0
+          };
+
+          realm.write(() => {
+            realm.create('User', data, true);
+          })
+        }
+      })
+      .catch(err => {
+        throw new Error("User Creation Failed: ", e);
+      })
+
+  }
 
 
 
-render() {
+  render() {
 
-  return (
-    <AppContainer />
-  );
-}
+    return (
+      <AppContainer />
+    );
+  }
 }
 
 
