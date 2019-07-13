@@ -3,7 +3,15 @@ import { ImageBackground } from "react-native";
 import bgImage from '../../assets/background.jpg';
 import { CardSection } from './common/CardSection';
 import CardBox from './common/CardBox';
-// import { CardInfo } from './common/CardInfo';
+import { getExpenses, getIncomes } from '../backend/helpers'
+import { StatusBar } from 'react-native';
+import { CardInfo } from './common/CardInfo';
+
+import { View, FlatList } from 'react-native'
+
+
+import { NavigationEvents } from 'react-navigation';
+
 
 import {
   Container,
@@ -18,8 +26,15 @@ import {
   Button,
   Title,
   Icon,
-  Fab
+  Fab,
+  List
 } from "native-base";
+import getRealm from "../services/realm";
+
+import { addExpense } from '../backend/actions'
+
+
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -29,72 +44,12 @@ export default class Home extends Component {
     this.state = {
 
       //MOCK DATA.. USE DATABASE TO FETCH DATA  
-      userInfo: [{
-        id: 0,
-        amount: 1000,
-        currency: "Rs.",
-        title: "Net Balance",
-        textNote: '',
-        date: Date.now()
-      }],
-      income: [
-        {
-          id: 0,
-          currency: "Rs.",
-          title: "This Week",
-          textNote: '',
-          amount: 30,
-          date: Date.now()
-        },
-        {
-          id: 1,
-          currency: "Rs.",
-          title: "Last Week",
-          textNote: 'Noted',
-          amount: 70,
-          date: Date.now()
-
-        }
-      ],
-      expense: [
-        {
-          id: 0,
-          currency: "Rs.",
-          title: "This Week",
-          textNote: '',
-          amount: 30,
-          date: Date.now()
-
-        },
-        {
-          id: 1,
-          currency: "Rs.",
-          title: "Last Week",
-          textNote: 'Noted',
-          amount: 70,
-          date: Date.now()
-
-        },
-        {
-          id: 2,
-          currency: "Rs.",
-          title: "Last Week",
-          textNote: 'Noted',
-          amount: 70,
-          date: Date.now()
-
-        },
-        {
-          id: 3,
-          currency: "Rs.",
-          title: "Last Week",
-          textNote: 'Noted',
-          amount: 70,
-          date: Date.now()
-
-        }
-      ]
+      testExpense: [],
+      userInfo: [],
+      income: [],
+      expense: []
     }
+
   };
   addExpense = (newData) => {
 
@@ -117,9 +72,44 @@ export default class Home extends Component {
 
   }
 
+
+
+  componentWillMount() {
+    getRealm().then(async realm => {
+      const exp = await getExpenses();
+      const income = await getIncomes();
+      const user = realm.objects('User');
+
+      console.log(user)
+      this.setState({
+        expense: [...exp],
+        userInfo: [...user],
+        income:[...income]
+
+      })
+      console.log('UserData: ', this.state.userInfo);
+    })
+  }
+
+  componentDidUpdate() {
+
+  }
+
+  componentDidMount() {
+    StatusBar.setHidden(true);
+
+  }
+  expenseChange = (exp) => {
+    this.setState({
+      expense: [...this.state.expense, ...exp]
+    })
+  }
+
   render() {
+    let loaded = 0;
     return (
       <Container>
+        
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
           <Header transparent style={{ marginTop: 20 }}>
             <Body style={{ marginLeft: 9 }}>
@@ -134,29 +124,41 @@ export default class Home extends Component {
               </Button>
             </Right>
           </Header>
+
           <Content padder>
             <CardBox header="Net Balance"
               onPress={() => alert("Pressed")}
               data={this.state.userInfo}
+
             />
             <CardBox header="Expenses"
-              onPress={() => { this.props.navigation.navigate('Expense'); }}
-              data={this.state.expense < 3 ? this.state.expense : this.state.expense.slice(0, 3)} />
+              state={this.state.expense}
+              onPress={() => {
+                this.props.navigation.navigate('Expense',
+                  {data: Array.from(this.state.expense),});
+              }}
+              data={this.state.expense < 3 ? this.state.expense : this.state.expense.slice(0, 3)}
 
+            />
+          
             <CardBox header="Income"
-              onPress={() => this.props.navigation.navigate('Income') }
+              state={this.state.income}
+
+              onPress={() => this.props.navigation.navigate('Income')}
               data={this.state.income < 3 ? this.state.income : this.state.income.slice(0, 3)} />
 
           </Content>
           <Fab
             style={{ backgroundColor: 'blue', marginBottom: 20 }}
             position="bottomRight"
-            onPress={() => this.props.navigation.navigate('AddTransactions')}>
+            onPress={() => this.props.navigation.navigate('AddTransactions',{
+              state:this.state
+            })}>
             <Icon ios='ios-add' android="md-add" style={{ fontSize: 35, color: '#fff' }} />
           </Fab>
         </ImageBackground>
-      </Container>
+      </Container >
     );
   }
-}
 
+}

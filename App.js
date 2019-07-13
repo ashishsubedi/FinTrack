@@ -11,15 +11,23 @@ import ShowGraph from './src/components/screens/ShowGraph'
 import AddBudget from './src/components/screens/AddBudget'
 import AddTransactions from './src/components/screens/AddTransactions'
 //import { Income, Expense, AddTransactions } from './src/components/screens';
+<<<<<<< HEAD
 import { CategoryIncomeChart, CategorySpentChart, Weekly } from './src/components/Charts'
 import ChartDetails from './src/components/screens/ChartDetails'
+=======
+import { CategoryIncomeChart, CategorySpentChart, Weekly, MonthlyLine } from './src/components/Charts'
+import ChartDetails from './src/components/screens/ChartDeatils'
+>>>>>>> ae47110eec4c0b143e47ddd18b935c22592ac2e3
+
+
+//
+import { getCategoriesCount, recordCategory } from './src/backend/helpers'
 
 
 //React navigation
 import { createAppContainer, createStackNavigator, createBottomTabNavigator } from 'react-navigation'
-
-
-
+import getRealm from './src/services/realm';
+// import console = require('console');
 
 
 
@@ -29,6 +37,8 @@ export default class App extends Component {
     super(props);
     //Load data from database
     this.state = {
+      categoriesCount: 0,
+      realm: null,
       data: [
         {
           id: 0,
@@ -122,11 +132,59 @@ export default class App extends Component {
 
 
   }
+  componentWillMount() {
+    /* getRealm().then(realm => {
+
+      realm.beginTransaction();
+      realm.deleteModel('Expense');
+      realm.deleteModel('Income');
+      realm.deleteModel('Budget');
+      realm.deleteModel('Prediction');
+      realm.deleteModel('User');
+      realm.commitTransaction();
+
+  }) */
+    getCategoriesCount().then(length => {
+      if (length == 0) {
+        recordCategory({ id: 0, name: 'wage', icon: '' });
+        recordCategory({ id: 1, name: 'foodAndDrinks', icon: '' });
+        recordCategory({ id: 2, name: 'transport', icon: '' });
+        recordCategory({ id: 3, name: 'kitchen', icon: '' });
+        recordCategory({ id: 4, name: 'rent', icon: '' });
+        recordCategory({ id: 5, name: 'study', icon: '' });
+        recordCategory({ id: 6, name: 'misceallaneous', icon: '' });
+      }
+    }).catch(err => {
+      throw new Error("Category Creation Failed: ", e);
+    })
+    getRealm()
+      .then(realm => {
+        const length = realm.objects('User').length;
+        if (length == 0) {
+          const data = {
+            id: 0,
+            name: 'User',
+            balance: 0.0
+          };
+
+          realm.write(() => {
+            realm.create('User', data, true);
+          })
+        }
+      })
+      .catch(err => {
+        throw new Error("User Creation Failed: ", e);
+      })
+
+  }
+
+
+
   render() {
 
     return (
-      <ShowGraph />
-    )
+      <AppContainer />
+    );
   }
 }
 

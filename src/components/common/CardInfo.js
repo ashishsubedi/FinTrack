@@ -18,7 +18,7 @@ export default class CardInfo extends React.Component {
     render() {
         const { onPress, currency, title, textNote, amount, date } = this.props;
         return (
-            <CardItem button onPress={() => onPress}>
+            <CardItem button onPress={onPress}>
                 <Body>
                     <Text>{title}</Text>
                     <Text note>{textNote}</Text>

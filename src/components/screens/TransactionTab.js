@@ -64,10 +64,10 @@ class TransactionTab extends Component {
           label: 'Miscellaneous',
           value: 'miscellaneous',
         },
-      ]
+      ],
+
 
     }
-
   }
 
 
@@ -82,12 +82,10 @@ class TransactionTab extends Component {
             <Card noShadow={true}>
               <List style={{ marginTop: 10, fontSize: 18 }}>
                 <ListItem onPress={() => alert("add transactions to the panel")}>
-                  <Text style={{ fontSize:24,color: 'green'}}>$</Text>
-                  <Input placeholder="Tap to add amount" style={{ fontSize: 24, color: 'red' }}
-                    onChangeText={this.props.onChangeText}
-                    value={this.props.value}
-                  />
-                  <Text style={{ fontSize: 24, color: 'red' }}>{this.props.amount}</Text>
+                  {/* <Text style={{ fontSize: 24, color: 'red' }}>{this.props.amount}</Text> */}
+
+                    <Input placeholder="Amount" onChangeText={this.props.handleAmount} keyboardType={'number-pad'}   />
+
                 </ListItem>
                 <ListItem>
                   <Body>
@@ -95,26 +93,30 @@ class TransactionTab extends Component {
                     <PickerIcon pickerItems={this.state.pickerItems} selected={this.props.selected} onValueChange={this.props.onValueChange} />
                   </Body>
                 </ListItem>
-                <ListItem onPress={() => {
-                    alert('Works');
+                {/* <ListItem onPress={() => {
+                  alert('Works');
 
                 }}>
                   <Body>
                     <Text>Account</Text>
                     <Text note>No account</Text>
                   </Body>
-                </ListItem>
+                </ListItem> */}
                 <ListItem style={{ color: '#ccc' }} onPress={() => alert("add transactions to the panel")}>
                   <Body>
                     <Text>Note</Text>
                     <Item>
-                      <Input placeholder="Tap to add note" />
+                      <Input placeholder="Tap to add note" onChangeText={this.props.handleNote} />
                     </Item>
                   </Body>
                 </ListItem>
               </List>
             </Card>
-            <Button block success><Text>SAVE</Text></Button>
+            <Button block success onPress={this.props.save}><Text>SAVE</Text></Button>
+            {/* <Text>
+              {this.props.note}
+            </Text>
+             */}
           </Content>
         </ImageBackground>
       </Container>

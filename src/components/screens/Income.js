@@ -28,7 +28,7 @@ export default class Income extends Component {
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
           <Header transparent style={{ marginTop: 20 }}>
             <Left>
-              <Button transparent onPress={() => alert("Show back panel")}>
+              <Button transparent onPress={() => this.props.navigation.navigate('Home')}>
                 <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
               </Button>
             </Left>
