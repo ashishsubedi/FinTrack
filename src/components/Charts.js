@@ -63,8 +63,8 @@ for (i = 0; i < CategoryIncome.length; i++) {
 /**CHANGE REQUIRED*/
 
 /**DATA SHOULD BE ADDED FROM DATABASE IN SIMILAR PATTERN
- * Here data stores the information on weekly basis. 
- * 
+ * Here data stores the information on weekly basis.
+ *
 
  * day 1 refers to sunday, day 2 refers to monday and so on accordinly.
  * expenditure refers to the total expenditure in that particular day.
@@ -146,22 +146,22 @@ export class Weekly extends Component {
 
               x="day"
               y="expenditure"
-              
-              
+
+
               style={{ data: { fill: "#89cff0", width: 18 } }}
               data={weeklyData}
 
-             
+
 
 
             />
-        
-      
-      
+
+
+
           </VictoryContainer>
         </VictoryChart>
         <VictoryLegend x={80} y={0}
-          itemsPerRow={1}         
+          itemsPerRow={1}
           orientation="horizontal"
           style={{ data: { fontSize:30 } }}
 

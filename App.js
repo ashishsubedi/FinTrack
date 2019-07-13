@@ -7,10 +7,12 @@ import Profile from './src/components/Profile'
 import Budget from './src/components/Budget'
 import Income from './src/components/screens/Income'
 import Expense from './src/components/screens/Expense'
+import ShowGraph from './src/components/screens/ShowGraph'
+import AddBudget from './src/components/screens/AddBudget'
 import AddTransactions from './src/components/screens/AddTransactions'
 //import { Income, Expense, AddTransactions } from './src/components/screens';
 import { CategoryIncomeChart, CategorySpentChart, Weekly } from './src/components/Charts'
-import ChartDetails from './src/components/screens/ChartDeatils'
+import ChartDetails from './src/components/screens/ChartDetails'
 
 
 //React navigation
@@ -123,7 +125,7 @@ export default class App extends Component {
   render() {
 
     return (
-      <ChartDetails/>
+      <ShowGraph />
     )
   }
 }

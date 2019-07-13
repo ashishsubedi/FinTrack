@@ -65,16 +65,16 @@ class TransactionTab extends Component {
           value: 'miscellaneous',
         },
       ]
-      
+
     }
-    
+
   }
 
-  
 
-  
+
+
   render() {
-    
+
     return (
       <Container>
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
@@ -82,6 +82,11 @@ class TransactionTab extends Component {
             <Card noShadow={true}>
               <List style={{ marginTop: 10, fontSize: 18 }}>
                 <ListItem onPress={() => alert("add transactions to the panel")}>
+                  <Text style={{ fontSize:24,color: 'green'}}>$</Text>
+                  <Input placeholder="Tap to add amount" style={{ fontSize: 24, color: 'red' }}
+                    onChangeText={this.props.onChangeText}
+                    value={this.props.value}
+                  />
                   <Text style={{ fontSize: 24, color: 'red' }}>{this.props.amount}</Text>
                 </ListItem>
                 <ListItem>
@@ -92,7 +97,7 @@ class TransactionTab extends Component {
                 </ListItem>
                 <ListItem onPress={() => {
                     alert('Works');
-                   
+
                 }}>
                   <Body>
                     <Text>Account</Text>

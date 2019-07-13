@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ImageBackground } from "react-native";
-import { CategoryIncomeChart, CategorySpentChart, Weekly } from './src/components/Charts'
+import { CategoryIncomeChart, CategorySpentChart, Weekly } from '../Charts';
 
 
 import {
@@ -28,7 +28,7 @@ export default class ChartDetails extends Component {
                         <Title style={{ fontSize: 35 }}>One-week expense</Title>
                     </Body>
                 </Header>
-
+                <Content padder>
                 <Card noShadow={true} >
                     <CardItem>
                         <Title style={{ fontSize: 25 }}>Category expense</Title>
@@ -41,7 +41,7 @@ export default class ChartDetails extends Component {
                 <CardItem>
                     <Title style={{ fontSize: 25 }}>Category income</Title>
                     <CategorySpentChart/>
-                </CardItem>        
+                </CardItem>
             </Card>
 
 */}
@@ -51,6 +51,7 @@ export default class ChartDetails extends Component {
                         <Weekly />
                     </CardItem>
                 </Card>
+                </Content>
             </Container>
         )
     }
