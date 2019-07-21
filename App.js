@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Platform } from 'react-native';
 //import { Home, Stats, Profile, Budget } from './src/components';
 import Home from './src/components/Home'
 import Stats from './src/components/Stats'
@@ -9,15 +9,18 @@ import Income from './src/components/screens/Income'
 import Expense from './src/components/screens/Expense'
 import ShowGraph from './src/components/screens/ShowGraph'
 import AddBudget from './src/components/screens/AddBudget'
+import OneWeekExpense from './src/components/screens/OneWeekExpense'
+import MonthlyCategoryStats from './src/components/screens/MonthlyCategoryStats'
+import AnnualCategoryStats from './src/components/screens/AnnualCategoryStats'
 import AddTransactions from './src/components/screens/AddTransactions'
 //import { Income, Expense, AddTransactions } from './src/components/screens';
-<<<<<<< HEAD
+// <<<<<<< HEAD
 import { CategoryIncomeChart, CategorySpentChart, Weekly } from './src/components/Charts'
 import ChartDetails from './src/components/screens/ChartDetails'
-=======
-import { CategoryIncomeChart, CategorySpentChart, Weekly, MonthlyLine } from './src/components/Charts'
-import ChartDetails from './src/components/screens/ChartDeatils'
->>>>>>> ae47110eec4c0b143e47ddd18b935c22592ac2e3
+// =======
+// import { CategoryIncomeChart, CategorySpentChart, Weekly, MonthlyLine } from './src/components/Charts'
+// import ChartDetails from './src/components/screens/ChartDeatils'
+// >>>>>>> ae47110eec4c0b143e47ddd18b935c22592ac2e3
 
 
 //
@@ -204,6 +207,10 @@ const HomeStackNavigator = createStackNavigator({
 
 const StatsStackNavigator = createStackNavigator({
   Stats,
+  ShowGraph,
+  OneWeekExpense,
+  MonthlyCategoryStats,
+  AnnualCategoryStats
 }, {
     headerMode: 'none',
     navigationOptions: {
@@ -213,6 +220,7 @@ const StatsStackNavigator = createStackNavigator({
 
 const BudgetStackNavigator = createStackNavigator({
   Budget,
+  AddBudget
 }, {
     headerMode: 'none',
     navigationOptions: {

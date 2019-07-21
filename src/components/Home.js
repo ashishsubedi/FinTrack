@@ -36,6 +36,7 @@ import { addExpense } from '../backend/actions'
 
 
 export default class Home extends Component {
+
   constructor(props) {
     super(props);
     //Get count and data from database and set it to that
@@ -43,7 +44,7 @@ export default class Home extends Component {
 
     this.state = {
 
-      //MOCK DATA.. USE DATABASE TO FETCH DATA  
+      //MOCK DATA.. USE DATABASE TO FETCH DATA
       testExpense: [],
       userInfo: [],
       income: [],
@@ -109,7 +110,7 @@ export default class Home extends Component {
     let loaded = 0;
     return (
       <Container>
-        
+
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
           <Header transparent style={{ marginTop: 20 }}>
             <Body style={{ marginLeft: 9 }}>
@@ -140,7 +141,7 @@ export default class Home extends Component {
               data={this.state.expense < 3 ? this.state.expense : this.state.expense.slice(0, 3)}
 
             />
-          
+
             <CardBox header="Income"
               state={this.state.income}
 
@@ -149,7 +150,7 @@ export default class Home extends Component {
 
           </Content>
           <Fab
-            style={{ backgroundColor: 'blue', marginBottom: 20 }}
+            style={{ backgroundColor: '#4F42B5', marginBottom: 20 }}
             position="bottomRight"
             onPress={() => this.props.navigation.navigate('AddTransactions',{
               state:this.state

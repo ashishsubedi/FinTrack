@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { ImageBackground } from "react-native";
-<<<<<<< HEAD:src/components/screens/ChartDetails.js
+// <<<<<<< HEAD:src/components/screens/ChartDetails.js
 import { CategoryIncomeChart, CategorySpentChart, Weekly } from '../Charts';
-=======
-import { CategoryIncomeChart, CategorySpentChart, Weekly } from '../Charts'
->>>>>>> ae47110eec4c0b143e47ddd18b935c22592ac2e3:src/components/screens/ChartDeatils.js
+// =======
+// import { CategoryIncomeChart, CategorySpentChart, Weekly } from '../Charts'
+// >>>>>>> ae47110eec4c0b143e47ddd18b935c22592ac2e3:src/components/screens/ChartDeatils.js
 
 
 import {

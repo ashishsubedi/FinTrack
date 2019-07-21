@@ -14,7 +14,8 @@ import {
   Button,
   Title,
   Icon,
-  DatePicker
+  DatePicker,
+  Fab
 } from "native-base";
 export default class Budget extends Component {
   render() {
@@ -60,6 +61,12 @@ export default class Budget extends Component {
               </CardItem>
             </Card>
           </Content>
+          <Fab
+            style={{ backgroundColor: '#4F42B5', marginBottom: 20 }}
+            position="bottomRight"
+            onPress={() => this.props.navigation.navigate('AddBudget')}>
+            <Icon ios='ios-add' android="md-add" style={{ fontSize: 35, color: '#fff' }} />
+          </Fab>
         </ImageBackground>
       </Container>
     );

@@ -16,6 +16,8 @@ import {
   Icon
 } from "native-base";
 
+import { NavigationEvents } from 'react-navigation';
+
 import { CategoryIncomeChart, CategorySpentChart, Weekly } from './Charts'
 
 export default class Stats extends Component {
@@ -31,7 +33,7 @@ export default class Stats extends Component {
           </Header>
           <Content>
             <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show Daily trends panel")}>
+              <CardItem button onPress={() => this.props.navigation.navigate('ShowGraph')}>
                 <Left style={{ margin: 10 }}>
                   <Icon name='trending-up' style={{ fontSize: 35, color: '#000', marginRight: 15 }} />
                   <Body>
@@ -41,12 +43,12 @@ export default class Stats extends Component {
                 </Left>
               </CardItem>
               {/* Daily Trend DATA
-              
-              
+
+
               */}
             </Card>
             <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show Week expense panel")}>
+              <CardItem button onPress={() => this.props.navigation.navigate('OneWeekExpense')}>
                 <Left style={{ margin: 10 }}>
                   <Icon name='ios-analytics' style={{ fontSize: 38, color: '#000', marginRight: 15 }} />
                   <Body>
@@ -54,13 +56,11 @@ export default class Stats extends Component {
                     <Text note>View weekly spend report </Text>
                   </Body>
                 </Left>
-
               </CardItem>
-              <Weekly />
-
             </Card>
+
             <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show monthly category stats panel")}>
+              <CardItem button onPress={() => this.props.navigation.navigate('MonthlyCategoryStats')}>
                 <Left style={{ margin: 10 }}>
                   <Icon name='ios-analytics' style={{ fontSize: 38, color: '#000', marginRight: 15 }} />
                   <Body>
@@ -69,10 +69,9 @@ export default class Stats extends Component {
                   </Body>
                 </Left>
               </CardItem>
-              <CategorySpentChart/>
             </Card>
             <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show Annual Category Stats panel")}>
+              <CardItem button onPress={() => this.props.navigation.navigate('AnnualCategoryStats')}>
                 <Left style={{ margin: 10 }}>
                   <Icon name='ios-analytics' style={{ fontSize: 38, color: '#000', marginRight: 15 }} />
                   <Body>
