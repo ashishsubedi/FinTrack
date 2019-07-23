@@ -3,6 +3,8 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, Left, Right, Butt
 
 import TransactionTab from './TransactionTab';
 
+import getRealm from '../../services/realm';
+
 import { addExpense, addIncome } from '../../backend/actions'
 // import console = require('console');
 // import console = require('console');
@@ -65,6 +67,18 @@ export default class AddTransactions extends Component {
                   amount: this.state.amount,
                   note: this.state.note
                 });
+                try {
+                  const realm = await getRealm();
+                  let user = realm.objects('User')[0];
+                  realm.write(()=>{
+                    user.balance -= data.amount;
+                   
+                  })
+                
+          
+              } catch (e) {
+                  throw new Error('Error');
+              }
                 this.props.navigation.navigate('Home');
               }}
               amount={this.state.amount} note={this.state.note} selected={this.state.selected} onValueChange={this.onValueChange} handleAmount={this.handleAmount} handleNote={this.handleNote} />
@@ -77,6 +91,18 @@ export default class AddTransactions extends Component {
                 amount: this.state.amount,
                 note: this.state.note
               });
+              try {
+                const realm = await getRealm();
+                let user = realm.objects('User')[0];
+                console.log(user, this.state.amount)
+                realm.write(()=>{
+                  user.balance += data.amount;
+                })
+            } catch (e) {
+                throw new Error('Error');
+            }
+
+            
               this.props.navigation.navigate('Home');
             }}
             amount={this.state.amount} note={this.state.note} selected={this.state.selected} onValueChange={this.onValueChange} handleAmount={this.handleAmount} handleNote={this.handleNote} />

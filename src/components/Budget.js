@@ -17,8 +17,50 @@ import {
   DatePicker,
   Fab
 } from "native-base";
+
+import { CardInfo } from './common/CardInfo';
+import Moment from 'moment';
+
+
+
 export default class Budget extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      amount: 0,
+      selected: 'wage',
+      note: 'Budget',
+      data: []
+    }
+  }
+  onValueChange = (value) => {
+    this.setState({
+      selected: value,
+    });
+  }
+  handleNote = (note) => {
+    this.setState({
+      note
+    })
+  }
+  handleAmount = (amount) => {
+    this.setState({
+      amount
+    })
+  }
+
   render() {
+
+    if (this.props.navigation.state.params != null) {
+      amount = this.props.navigation.getParam('amount', 0);
+      selected = this.props.navigation.getParam('selected', 'wage');
+      timeInterval = this.props.navigation.getParam('timeInterval', 0);
+      this.state.data[0] = {
+        amount, selected, timeInterval
+      }
+      console.log(this.state)
+    }
     return (
       <Container>
         <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
@@ -30,9 +72,9 @@ export default class Budget extends Component {
           <Content padder>
             <Card>
               <CardItem header bordered>
-                <Text>How much have you saved?</Text>
+                <Text>Your Budget?</Text>
               </CardItem>
-              <CardItem bordered button onPress={() => alert("Show wage panel")}>
+              {/* <CardItem bordered button onPress={() => alert("Show wage panel")}>
                 <Body>
                   <Text>Today</Text>
                 </Body>
@@ -55,10 +97,21 @@ export default class Budget extends Component {
                 <Right>
                   <Text>$0.00</Text>
                 </Right>
-              </CardItem>
-              <CardItem footer bordered>
-                <DatePicker />
-              </CardItem>
+              </CardItem> */}
+
+
+              {/* {this.state.data.map(item => (
+                <CardInfo onPress={item.onPress} currency='Rs. '
+                  title={item.title || item.note || item.name}
+                  textNote={item.textNote || ''}
+                  amount={item.amount || item.balance}
+                  date={item.date||Moment().format()}
+                  key={item.id||0}
+                />
+              ))
+              } */}
+
+
             </Card>
           </Content>
           <Fab
