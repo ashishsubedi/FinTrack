@@ -1,41 +1,51 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Platform } from 'react-native';
+import React, { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Platform
+} from "react-native";
 //import { Home, Stats, Profile, Budget } from './src/components';
-import Home from './src/components/Home'
-import Stats from './src/components/Stats'
-import Profile from './src/components/Profile'
-import Budget from './src/components/Budget'
-import Income from './src/components/screens/Income'
-import Expense from './src/components/screens/Expense'
-import ShowGraph from './src/components/screens/ShowGraph'
-import AddBudget from './src/components/screens/AddBudget'
-import OneWeekExpense from './src/components/screens/OneWeekExpense'
-import MonthlyCategoryStats from './src/components/screens/MonthlyCategoryStats'
-import AnnualCategoryStats from './src/components/screens/AnnualCategoryStats'
-import AddTransactions from './src/components/screens/AddTransactions'
+import Home from "./src/components/Home";
+import Stats from "./src/components/Stats";
+import Profile from "./src/components/Profile";
+import Budget from "./src/components/Budget";
+import Income from "./src/components/screens/Income";
+import Expense from "./src/components/screens/Expense";
+import ShowGraph from "./src/components/screens/ShowGraph";
+import AddBudget from "./src/components/screens/AddBudget";
+import OneWeekExpense from "./src/components/screens/OneWeekExpense";
+import MonthlyCategoryStats from "./src/components/screens/MonthlyCategoryStats";
+import AnnualCategoryStats from "./src/components/screens/AnnualCategoryStats";
+import AddTransactions from "./src/components/screens/AddTransactions";
 //import { Income, Expense, AddTransactions } from './src/components/screens';
 // <<<<<<< HEAD
-import { CategoryIncomeChart, CategorySpentChart, Weekly } from './src/components/Charts'
-import ChartDetails from './src/components/screens/ChartDetails'
+import {
+  CategoryIncomeChart,
+  CategorySpentChart,
+  Weekly
+} from "./src/components/Charts";
+import ChartDetails from "./src/components/screens/ChartDetails";
 // =======
 // import { CategoryIncomeChart, CategorySpentChart, Weekly, MonthlyLine } from './src/components/Charts'
 // import ChartDetails from './src/components/screens/ChartDeatils'
 // >>>>>>> ae47110eec4c0b143e47ddd18b935c22592ac2e3
 
-
 //
-import { getCategoriesCount, recordCategory } from './src/backend/helpers'
-
+import { getCategoriesCount, recordCategory } from "./src/backend/helpers";
+import { Store } from "./src/context/StoreContext.js";
 
 //React navigation
-import { createAppContainer, createStackNavigator, createBottomTabNavigator } from 'react-navigation'
-import getRealm from './src/services/realm';
+import {
+  createAppContainer,
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
+import getRealm from "./src/services/realm";
 // import console = require('console');
 
-
-
 export default class App extends Component {
-
   constructor(props) {
     super(props);
     //Load data from database
@@ -45,95 +55,102 @@ export default class App extends Component {
       data: [
         {
           id: 0,
-          category: 'Food And Drinks',
-          title: 'Khaja',
+          category: "Food And Drinks",
+          title: "Khaja",
           amount: 30,
-          currency: 'Rs',
+          currency: "Rs",
           date: Date.now()
         },
         {
           id: 1,
-          category: 'Food And Drinks',
-          title: 'Khaja',
+          category: "Food And Drinks",
+          title: "Khaja",
           amount: 60,
-          currency: 'Rs',
+          currency: "Rs",
           date: Date.now()
         },
         {
           id: 2,
-          category: 'Food And Drinks',
-          title: 'Khaja',
+          category: "Food And Drinks",
+          title: "Khaja",
           amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 3,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 4,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 5,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 6,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 7,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 8,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 9,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 10,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
-          date: Date.now()
-        }, {
-          id: 11,
-          category: 'Food And Drinks',
-          title: 'Khaja',
-          amount: 60,
-          currency: 'Rs',
+          currency: "Rs",
           date: Date.now()
         },
+        {
+          id: 3,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 4,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 5,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 6,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 7,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 8,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 9,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 10,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        },
+        {
+          id: 11,
+          category: "Food And Drinks",
+          title: "Khaja",
+          amount: 60,
+          currency: "Rs",
+          date: Date.now()
+        }
       ]
-    }
-
-
+    };
   }
   componentWillMount() {
     /* getRealm().then(realm => {
@@ -147,104 +164,117 @@ export default class App extends Component {
       realm.commitTransaction();
 
   }) */
-    getCategoriesCount().then(length => {
-      if (length == 0) {
-        recordCategory({ id: 0, name: 'wage', icon: '' });
-        recordCategory({ id: 1, name: 'foodAndDrinks', icon: '' });
-        recordCategory({ id: 2, name: 'transport', icon: '' });
-        recordCategory({ id: 3, name: 'kitchen', icon: '' });
-        recordCategory({ id: 4, name: 'rent', icon: '' });
-        recordCategory({ id: 5, name: 'study', icon: '' });
-        recordCategory({ id: 6, name: 'misceallaneous', icon: '' });
-      }
-    }).catch(err => {
-      throw new Error("Category Creation Failed: ", e);
-    })
+    getCategoriesCount()
+      .then(length => {
+        if (length == 0) {
+          recordCategory({ id: 0, name: "wage", icon: "" });
+          recordCategory({ id: 1, name: "foodAndDrinks", icon: "" });
+          recordCategory({ id: 2, name: "transport", icon: "" });
+          recordCategory({ id: 3, name: "kitchen", icon: "" });
+          recordCategory({ id: 4, name: "rent", icon: "" });
+          recordCategory({ id: 5, name: "study", icon: "" });
+          recordCategory({ id: 6, name: "misceallaneous", icon: "" });
+        }
+      })
+      .catch(err => {
+        throw new Error("Category Creation Failed: ", e);
+      });
     getRealm()
       .then(realm => {
-        const length = realm.objects('User').length;
+        const length = realm.objects("User").length;
         if (length == 0) {
           const data = {
             id: 0,
-            name: 'User',
+            name: "User",
             balance: 0.0
           };
 
           realm.write(() => {
-            realm.create('User', data, true);
-          })
+            realm.create("User", data, true);
+          });
         }
       })
       .catch(err => {
         throw new Error("User Creation Failed: ", e);
-      })
-
+      });
   }
 
-
-
   render() {
-
     return (
-      <AppContainer />
+      <Store>
+        <AppContainer />
+      </Store>
     );
   }
 }
 
+const HomeStackNavigator = createStackNavigator(
+  {
+    Home,
+    Income,
+    Expense,
+    AddTransactions
+  },
+  {
+    headerMode: "none",
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+);
 
+const StatsStackNavigator = createStackNavigator(
+  {
+    Stats,
+    ShowGraph,
+    OneWeekExpense,
+    MonthlyCategoryStats,
+    AnnualCategoryStats
+  },
+  {
+    headerMode: "none",
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+);
 
-const HomeStackNavigator = createStackNavigator({
-  Home,
-  Income,
-  Expense,
-  AddTransactions
-}, {
-    headerMode: 'none',
+const BudgetStackNavigator = createStackNavigator(
+  {
+    Budget,
+    AddBudget
+  },
+  {
+    headerMode: "none",
     navigationOptions: {
-      headerVisible: false,
+      headerVisible: false
     }
-  });
-
-const StatsStackNavigator = createStackNavigator({
-  Stats,
-  ShowGraph,
-  OneWeekExpense,
-  MonthlyCategoryStats,
-  AnnualCategoryStats
-}, {
-    headerMode: 'none',
+  }
+);
+const ProfileStackNavigator = createStackNavigator(
+  {
+    Profile
+  },
+  {
+    headerMode: "none",
     navigationOptions: {
-      headerVisible: false,
+      headerVisible: false
     }
-  });
-
-const BudgetStackNavigator = createStackNavigator({
-  Budget,
-  AddBudget
-}, {
-    headerMode: 'none',
+  }
+);
+const TabNavigator = createBottomTabNavigator(
+  {
+    Home: HomeStackNavigator,
+    Stats: StatsStackNavigator,
+    Budget: BudgetStackNavigator,
+    Profile: ProfileStackNavigator
+  },
+  {
+    headerMode: "none",
     navigationOptions: {
-      headerVisible: false,
+      headerVisible: false
     }
-  });
-const ProfileStackNavigator = createStackNavigator({
-  Profile,
-}, {
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false,
-    }
-  });
-const TabNavigator = createBottomTabNavigator({
-  Home: HomeStackNavigator,
-  Stats: StatsStackNavigator,
-  Budget: BudgetStackNavigator,
-  Profile: ProfileStackNavigator
-}, {
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false,
-    }
-  });
+  }
+);
 
 const AppContainer = createAppContainer(TabNavigator);
