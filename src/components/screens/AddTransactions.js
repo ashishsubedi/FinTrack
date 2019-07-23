@@ -18,8 +18,8 @@ import TransactionTab from "./TransactionTab";
 import {StoreContext} from '../../context/StoreContext.js'
 
 import { addExpense, addIncome } from "../../backend/actions";
-// import console = require('console');
-// import console = require('console');
+
+import getRealm from '../../services/realm';
 
 export default class AddTransactions extends Component {
   constructor(props) {
@@ -52,6 +52,7 @@ export default class AddTransactions extends Component {
     let state = this.props.navigation.getParam("state", {});
     return (
       <Container>
+
         <StoreContext.Consumer>
           {value => {
             return (
@@ -101,6 +102,18 @@ export default class AddTransactions extends Component {
                           amount: this.state.amount,
                           note: this.state.note
                         });
+                    try {
+                    const realm = await getRealm();
+                  let user = realm.objects('User')[0];
+                  realm.write(()=>{
+                    user.balance -= data.amount;
+                   
+                  })
+                
+          
+              } catch (e) {
+                  throw new Error('Error');
+              }
                         value.refreshApiData()
                         this.props.navigation.navigate("Home");
                       }}
@@ -127,6 +140,17 @@ export default class AddTransactions extends Component {
                           amount: this.state.amount,
                           note: this.state.note
                         });
+try {
+                const realm = await getRealm();
+                let user = realm.objects('User')[0];
+                console.log(user, this.state.amount)
+                realm.write(()=>{
+                  user.balance += data.amount;
+                })
+            } catch (e) {
+                throw new Error('Error');
+            }
+                        value.refreshApiData()
                         this.props.navigation.navigate("Home");
                       }}
                       amount={this.state.amount}
@@ -142,6 +166,7 @@ export default class AddTransactions extends Component {
             );
           }}
         </StoreContext.Consumer>
+
       </Container>
     );
   }

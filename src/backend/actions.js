@@ -19,15 +19,19 @@ import moment from 'moment'
             date: moment().format()
         }
         
+        
         recordExpense(data);
         return data;
     };
 
-    const addIncome = async ({ categoryValue, amount, note }) => {
-        const last = await getIncomes()[0];
+    const addIncome = async ({value: categoryValue, amount, note }) => {
+
+        const res = await getExpenses();
+        const category = await getCategoryByValue(categoryValue);
+
+        const last = res[0];
         const highestId = last == null ? 0 : last.id;
         const id = highestId == null ? 1 : highestId + 1;
-        const category = await getCategoryByValue(categoryValue);
 
         const data = {
             id,
