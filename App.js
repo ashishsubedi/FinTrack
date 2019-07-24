@@ -6,6 +6,7 @@ import {
   ImageBackground,
   Platform
 } from "react-native";
+import {Icon} from 'native-base';
 //import { Home, Stats, Profile, Budget } from './src/components';
 import Home from "./src/components/Home";
 import Stats from "./src/components/Stats";
@@ -20,6 +21,9 @@ import MonthlyCategoryStats from "./src/components/screens/MonthlyCategoryStats"
 import AnnualCategoryStats from "./src/components/screens/AnnualCategoryStats";
 import AddTransactions from "./src/components/screens/AddTransactions";
 //import { Income, Expense, AddTransactions } from './src/components/screens';
+
+import Moment from 'moment'
+
 // <<<<<<< HEAD
 import {
   CategoryIncomeChart,
@@ -33,7 +37,7 @@ import ChartDetails from "./src/components/screens/ChartDetails";
 // >>>>>>> ae47110eec4c0b143e47ddd18b935c22592ac2e3
 
 //
-import { getCategoriesCount, recordCategory } from "./src/backend/helpers";
+import { getCategoriesCount, recordCategory, getBudget } from "./src/backend/helpers";
 import { Store } from "./src/context/StoreContext.js";
 
 //React navigation
@@ -43,6 +47,7 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 import getRealm from "./src/services/realm";
+import { addBudget } from "./src/backend/actions";
 // import console = require('console');
 
 export default class App extends Component {
@@ -218,7 +223,10 @@ const HomeStackNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      headerVisible: false
+      headerVisible: false,
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="ios-home" size={15}/>
+      )
     }
   }
 );
@@ -234,7 +242,10 @@ const StatsStackNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      headerVisible: false
+      headerVisible: false,
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="ios-pie" size={15}/>
+      )
     }
   }
 );
@@ -247,7 +258,10 @@ const BudgetStackNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      headerVisible: false
+      headerVisible: false,
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="ios-paper" size={15}/>
+      )
     }
   }
 );
@@ -258,7 +272,10 @@ const ProfileStackNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      headerVisible: false
+      headerVisible: false,
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="ios-person" size={15}/>
+      )
     }
   }
 );

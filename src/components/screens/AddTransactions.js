@@ -15,7 +15,7 @@ import {
 } from "native-base";
 
 import TransactionTab from "./TransactionTab";
-import {StoreContext} from '../../context/StoreContext.js'
+import { StoreContext } from '../../context/StoreContext.js'
 
 import { addExpense, addIncome } from "../../backend/actions";
 
@@ -102,18 +102,18 @@ export default class AddTransactions extends Component {
                           amount: this.state.amount,
                           note: this.state.note
                         });
-                    try {
-                    const realm = await getRealm();
-                  let user = realm.objects('User')[0];
-                  realm.write(()=>{
-                    user.balance -= data.amount;
-                   
-                  })
-                
-          
-              } catch (e) {
-                  throw new Error('Error');
-              }
+                        try {
+                          const realm = await getRealm();
+                          let user = realm.objects('User')[0];
+                          realm.write(() => {
+                            user.balance -= data.amount;
+
+                          })
+
+
+                        } catch (e) {
+                          throw new Error('Error');
+                        }
                         value.refreshApiData()
                         this.props.navigation.navigate("Home");
                       }}
@@ -140,16 +140,16 @@ export default class AddTransactions extends Component {
                           amount: this.state.amount,
                           note: this.state.note
                         });
-try {
-                const realm = await getRealm();
-                let user = realm.objects('User')[0];
-                console.log(user, this.state.amount)
-                realm.write(()=>{
-                  user.balance += data.amount;
-                })
-            } catch (e) {
-                throw new Error('Error');
-            }
+                        try {
+                          const realm = await getRealm();
+                          let user = realm.objects('User')[0];
+                          console.log(user, this.state.amount)
+                          realm.write(() => {
+                            user.balance += data.amount;
+                          })
+                        } catch (e) {
+                          throw new Error('Error');
+                        }
                         value.refreshApiData()
                         this.props.navigation.navigate("Home");
                       }}

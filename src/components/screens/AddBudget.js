@@ -24,6 +24,8 @@ import {
   Input,
 } from "native-base";
 import { addBudget } from "../../backend/actions";
+import { StoreContext } from '../../context/StoreContext.js'
+
 import Moment from 'moment';
 
 export default class AddBudget extends Component {
@@ -76,87 +78,99 @@ export default class AddBudget extends Component {
   onDateChange = (date) => {
     this.setState({ date: date })
   }
+  handleAmount = amount => {
+    this.setState({
+      amount
+    });
+  };
+
 
   render() {
     return (
       <Container>
-        <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
-          <Header transparent style={{ marginTop: 20 }}>
-            <Body style={{ marginLeft: 9 }}>
-              <Title style={{ fontSize: 35 }}>New Budget</Title>
-            </Body>
-            <Right>
-              <Button transparent onPress={
-                async () => {
-                  const futureDate = Moment().add(1, 'M');
-                  const currentDate = Moment();
-                  const timeInterval = currentDate.diff(futureDate,'days')
-                  // const  budget = await addBudget({
-                  //   value: this.state.selected,
-                  //   amount: this.state.amount,
-                  //   timeInterval: futureDate - Moment()
-                  // });
-                  alert("Success!");
-                  this.props.navigation.navigate('Budget', {
-                    amount: this.state.amount, selected: this.state.selected,
-                    timeInterval: timeInterval
-                  });
-                }
+        <StoreContext.Consumer>
+          {value => {
+            return (
+              <React.Fragment>
+                <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
+                  <Header transparent style={{ marginTop: 20 }}>
+                    <Body style={{ marginLeft: 9 }}>
+                      <Title style={{ fontSize: 35 }}>New Budget</Title>
+                    </Body>
+                    <Right>
+                      <Button transparent onPress={
+                        async () => {
+                          const futureDate = Moment().add(1, 'M');
+                          const currentDate = Moment();
+                          const timeInterval = currentDate.diff(futureDate, 'days')
+                          // const  budget = await addBudget({
+                          //   value: this.state.selected,
+                          //   amount: this.state.amount,
+                          //   timeInterval: futureDate - Moment()
+                          // });
+                          alert("Success!");
+                          this.props.navigation.navigate('Budget');
+                        }
 
-              } >
-                <Icon name='checkmark' style={{ fontSize: 35, color: '#fff' }} />
-              </Button>
-            </Right>
-          </Header>
-          <Content padder>
-            <Card>
-              <List>
-                <ListItem>
-                  <Body>
-                    <PickerIcon pickerItems={this.state.pickerCategory} selected={this.state.selected} onValueChange={this.onValueChange} />
-                  </Body>
-                </ListItem>
-                <ListItem>
-                  <Body>
-                    <Text>Amount</Text>
-                    <Item>
-                      <Text style={{ fontSize: 24, color: 'green' }}>$</Text>
-                      <Input placeholder="Tap to add amount" style={{ fontSize: 24, color: 'red' }} keyboardType={'number-pad'} />
-                    </Item>
-                  </Body>
-                </ListItem>
-                <ListItem>
-                  <Body style={{ marginBottom: 10 }}>
-                    <Text>Budget balance goes to next month</Text>
-                  </Body>
+                      } >
+                        <Icon name='checkmark' style={{ fontSize: 35, color: '#fff' }} />
+                      </Button>
+                    </Right>
+                  </Header>
+                  <Content padder>
+                    <Card>
+                      <List>
+                        <ListItem>
+                          <Body>
+                            <PickerIcon pickerItems={this.state.pickerCategory} selected={this.state.selected} onValueChange={this.onValueChange} />
+                          </Body>
+                        </ListItem>
+                        <ListItem>
+                          <Body>
+                            <Text>Amount</Text>
+                            <Item>
+                              <Text style={{ fontSize: 24, color: 'green' }}>$</Text>
+                              <Input placeholder="Tap to add amount" style={{ fontSize: 24, color: 'red' }} keyboardType={'number-pad'} onChangeText={this.handleAmount} />
+                            </Item>
+                          </Body>
+                        </ListItem>
+                        <ListItem>
+                          <Body style={{ marginBottom: 10 }}>
+                            <Text>Budget balance goes to next month</Text>
+                          </Body>
 
-                  <CheckBox checked={true} />
-                </ListItem>
-                <CardItem footer bordered>
-                  <DatePicker onDateChange={this.onDateChange} />
-                </CardItem>
-              </List>
-            </Card>
-            <Button block success style={{ marginTop: 15 }} onPress={async () => {
+                          <CheckBox checked={true} />
+                        </ListItem>
+                        <CardItem footer bordered>
+                          <DatePicker onDateChange={this.onDateChange} />
+                        </CardItem>
+                      </List>
+                    </Card>
+                    <Button block success style={{ marginTop: 15 }} onPress={async () => {
 
-              
-                const futureDate = Moment(this.state.date).add(1, 'M');
-                // const  budget = await addBudget({
-                //   value: this.state.selected,
-                //   amount: this.state.amount,
-                //   timeInterval: futureDate - Moment()
-                // });
-                alert("Success!");
-                this.props.navigation.navigate('Budget', {
-                  amount: this.state.amount, selected: this.state.selected,
-                  timeInterval: futureDate - Moment()
-                });
-              }
+                      const futureDate = Moment(this.state.date).add(1, 'M');
+                      const currentDate = Moment();
+                      const budget = await addBudget({
+                        value: this.state.selected,
+                        amount: this.state.amount,
+                        timeInterval: futureDate.diff(currentDate, 'days')
+                      })
+                      console.log("BUDGETTT: ",budget)
+                      alert("Success!");
+                      value.refreshApiData();
+                      this.props.navigation.navigate('Budget');
+                    }
 
-            } >
-              <Text>OK</Text></Button>
-          </Content>
-        </ImageBackground>
+                    } >
+                      <Text>OK</Text></Button>
+                  </Content>
+                </ImageBackground>
+              </React.Fragment>
+            )
+          }}
+
+        </StoreContext.Consumer>
+
       </Container>
     );
   }

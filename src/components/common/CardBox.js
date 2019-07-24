@@ -17,7 +17,7 @@ export default class CardBox extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      data:[]
+      
     }
   }
 
@@ -31,7 +31,7 @@ export default class CardBox extends React.Component {
         </CardItem>
 
         {data.map(item => (
-          <CardInfo onPress={item.onPress} currency='Rs. '
+          <CardInfo onPress={this.props.onPress} currency='Rs. '
             title={item.title || item.note|| item.name}
             textNote={item.textNote}
             amount={item.amount||item.balance}

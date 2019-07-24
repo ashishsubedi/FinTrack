@@ -39,7 +39,7 @@ const recordBudget = async (data) => {
         return realm;
 
     } catch (e) {
-        throw new Error('Error');
+        throw new Error('Record BUdget Error');
         
     }
 };
@@ -255,15 +255,26 @@ const getBudget = async (date) => {
         return budget;
 
     } catch (e) {
-        throw new Error('Error');
+        throw new Error('Budget Error');
     }
 };
 
+const getBudgets = async () => {
+    try {
+        const realm = await getRealm();
+        let budget = realm.objects('Budget');
+        if(budget.length > 0)
+            budget = budget.sorted('date',true);
+        return budget;
 
+    } catch (e) {
+        throw new Error('Budget Error');
+    }
+};
 
 export {
     recordExpense, recordBudget, recordIncome, getCategoriesCount, recordCategory,getCategoryByValue,
     getExpenseById, getExpenseByAmount, getExpenseByCategory, getExpenseByDate, getExpenseByHighestAmount,
     getIncomeById, getIncomeByAmount, getIncomeByCategory, getIncomeByDate, getIncomeByHighestAmount,
-    getBudget, getExpenses, getIncomes
+    getBudget, getExpenses, getIncomes,getBudgets
 }

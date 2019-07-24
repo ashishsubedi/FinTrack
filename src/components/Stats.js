@@ -103,17 +103,7 @@ export default class Stats extends Component {
                 </Left>
               </CardItem>
             </Card>
-            <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show Projects Stats panel")}>
-                <Left style={{ margin: 10 }}>
-                  <Icon name='aperture' style={{ fontSize: 35, color: '#000', marginRight: 15 }} />
-                  <Body>
-                    <Text style={{ fontSize: 21 }}>Projects stats</Text>
-                    <Text note>View category stats within a project </Text>
-                  </Body>
-                </Left>
-              </CardItem>
-            </Card>
+            
           </Content>
         </ImageBackground>
       </Container>

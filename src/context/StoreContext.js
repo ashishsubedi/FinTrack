@@ -1,43 +1,51 @@
-import React,{createContext,createState,useEffect} from "react"
+import React, { createContext, } from "react"
 import getRealm from "../services/realm.js"
-import { getExpenses, getIncomes } from '../backend/helpers'
-export const StoreContext=createContext()
+import { getExpenses, getIncomes, getBudget, getBudgets } from '../backend/helpers'
+export const StoreContext = createContext()
 
 
-export class Store extends React.Component{
+export class Store extends React.Component {
 
-  state={income:[],expense:[],userInfo:[]}
+  state = {
+    income: [],
+    expense: [],
+    userInfo: [],
+    budget : []
+  }
 
-  componentWillMount=()=>{
+  componentWillMount = () => {
     //make api call for the first time//
     getRealm().then(async realm => {
-      const expense= await getExpenses();
+      const expense = await getExpenses();
       const income = await getIncomes();
+      const budget = await getBudgets();
       const user = realm.objects('User');
-
-      this.setState({income,expense})
+      console.log("USER: ", user)
+      console.log("BUDget 2: ", budget)
+      this.setState({ income, expense, userInfo: user, budget })
 
     })
   }
 
 
-  refreshApiData=()=>{
+  refreshApiData = () => {
     //make api call again and set api data//
     getRealm().then(async realm => {
       const expense = await getExpenses();
       const income = await getIncomes();
+      const budget = await getBudgets();
       const user = realm.objects('User');
 
-      console.log(income,expense)
-      this.setState({income,expense})
+      console.log(income, expense)
+      this.setState({ income, expense, userInfo: user, budget })
 
     })
   }
 
-  render(){
+  render() {
 
-    return(
-      <StoreContext.Provider value={{refreshApiData:this.refreshApiData,income:this.state.income,expense:this.state.expense,userInfo:this.state.userInfo}}>
+    return (
+      <StoreContext.Provider value={{ refreshApiData: this.refreshApiData, income: this.state.income, expense: this.state.expense, userInfo: this.state.userInfo, budget: this.state.budget }}>
         {this.props.children}
       </StoreContext.Provider>
     )

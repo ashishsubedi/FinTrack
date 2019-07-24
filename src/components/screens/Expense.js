@@ -22,69 +22,48 @@ import {
 import { View, FlatList } from 'react-native'
 
 import CardInfo from '../common/CardInfo';
+import CardBox from '../common/CardBox'
 import moment from 'moment'
+import { StoreContext } from '../../context/StoreContext';
 // import console = require('console');
 export default class Expense extends Component {
   render() {
-    let data = this.props.navigation.getParam('data', [{
-      title: 'No Item Found',
-      id: 0, textNote: '',
-      date: moment().format()
-    }]);
-    
-    console.log("DATA TYPE:",typeof(data));
     return (
       <Container>
-        <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
-          <Header transparent style={{ marginTop: 20 }}>
-            <Left>
-              <Button transparent onPress={() => alert("Show back panel")}>
-                <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
-              </Button>
-            </Left>
-            <Body style={{ marginLeft: 9 }}>
-              <Title style={{ fontSize: 35 }}>Expense</Title>
-            </Body>
+        <StoreContext.Consumer>
+          {
+            value => {
 
-          </Header>
-          <Content>
-            {/* <List style={{ marginTop: 10, fontSize: 18 }}>
-              {
-                data.map((item) =>
-                  (
-                    <CardInfo
-                      key={item.id}
-                      title={item.title}
-                      textNote={item.category}
-                      amount={item.amount}
-                      currency={item.currency}
-                      date={item.date}
-                    />
-                  )
-                )
-              }
-            </List> */}
+              return (
+                <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
+                  <Header transparent style={{ marginTop: 20 }}>
+                    <Left>
+                      <Button transparent onPress={() => this.props.navigation.goBack()}>
+                        <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
+                      </Button>
+                    </Left>
+                    <Body style={{ marginLeft: 9 }}>
+                      <Title style={{ fontSize: 35 }}>Expense</Title>
+                    </Body>
 
-            <List>
-              {console.log("DATA:", data)}
+                  </Header>
+                  <Content>
+                    
+                    <CardBox header="Expenses"
+                    state={value.expense}
+                   
+                    data={value.expense}
 
-              <FlatList
-                data={data}
-                renderItem={({ item }) => (
-                  <CardInfo
-                    key={item.id}
-                    title={item.title}
-                    textNote={item.category}
-                    amount={item.amount}
-                    currency={item.currency}
-                    date={item.date}
-                  />)
-                }
-                keyExtractor={(item, index) => item.id.toString()}
-              />
-            </List>
-          </Content>
-        </ImageBackground>
+                  />
+                  </Content>
+                </ImageBackground>
+              )
+            }
+          }
+
+
+        </StoreContext.Consumer>
+
       </Container>
     );
   }

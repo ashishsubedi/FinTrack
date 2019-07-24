@@ -105,14 +105,7 @@ export default class Home extends Component {
                   <Body style={{ marginLeft: 9 }}>
                     <Title style={{ fontSize: 35 }}>Daily book</Title>
                   </Body>
-                  <Right>
-                    <Button transparent onPress={() => alert("Show search panel")}>
-                      <Icon name='search' style={{ fontSize: 35, color: '#fff' }} />
-                    </Button>
-                    <Button transparent onPress={() => alert("Show more panel")}>
-                      <Icon name='more' style={{ fontSize: 35, color: '#fff' }} />
-                    </Button>
-                  </Right>
+                  
                 </Header>
 
                 <Content padder>

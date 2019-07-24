@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { ImageBackground } from "react-native";
 import bgImage from '../../../assets/background.jpg';
+import CardBox from '../common/CardBox'
+
+import { StoreContext } from '../../context/StoreContext';
+
 import {
   Container,
   List,
@@ -25,41 +29,40 @@ export default class Income extends Component {
     const { data } = this.props;
     return (
       <Container>
-        <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
-          <Header transparent style={{ marginTop: 20 }}>
-            <Left>
-              <Button transparent onPress={() => this.props.navigation.navigate('Home')}>
-                <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
-              </Button>
-            </Left>
-            <Body style={{ marginLeft: 9 }}>
-              <Title style={{ fontSize: 35 }}>Income</Title>
-            </Body>
-            <Right>
-              <Button transparent onPress={() => alert("Show search panel")}>
-                <Icon name='search' style={{ fontSize: 35, color: '#fff' }} />
-              </Button>
-            </Right>
-          </Header>
-          <Content>
-            <List style={{ marginTop: 10, fontSize: 18 }}>
-              {
-                data.map((item) =>
-                  (
-                    <CardInfo
-                      key={item.id}
-                      title={item.title}
-                      textNote={item.category}
-                      amount={item.amount}
-                      currency={item.currency}
-                      date={item.date}
-                    />
-                  )
-                )
-              }
-            </List>
-          </Content>
-        </ImageBackground>
+           <StoreContext.Consumer>
+          {
+            value => {
+
+              return (
+                <ImageBackground source={bgImage} style={{ width: '100%', height: '100%' }}>
+                  <Header transparent style={{ marginTop: 20 }}>
+                    <Left>
+                      <Button transparent onPress={() => this.props.navigation.goBack()}>
+                        <Icon name='ios-arrow-back' style={{ fontSize: 35, color: '#fff' }} />
+                      </Button>
+                    </Left>
+                    <Body style={{ marginLeft: 9 }}>
+                      <Title style={{ fontSize: 35 }}>Expense</Title>
+                    </Body>
+
+                  </Header>
+                  <Content>
+                    
+                    <CardBox header="Incomes"
+                    state={value.income}
+                    
+                    data={value.income}
+
+                  />
+                  </Content>
+                </ImageBackground>
+              )
+            }
+          }
+
+
+        </StoreContext.Consumer>
+
       </Container>
     );
   }
