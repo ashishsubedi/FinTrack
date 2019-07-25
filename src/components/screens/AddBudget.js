@@ -100,15 +100,16 @@ export default class AddBudget extends Component {
                     <Right>
                       <Button transparent onPress={
                         async () => {
-                          const futureDate = Moment().add(1, 'M');
+                          const futureDate = Moment(this.state.date).add(1, 'M');
                           const currentDate = Moment();
-                          const timeInterval = currentDate.diff(futureDate, 'days')
-                          // const  budget = await addBudget({
-                          //   value: this.state.selected,
-                          //   amount: this.state.amount,
-                          //   timeInterval: futureDate - Moment()
-                          // });
+                          const budget = await addBudget({
+                            value: this.state.selected,
+                            amount: this.state.amount,
+                            timeInterval: futureDate.diff(currentDate, 'days')
+                          })
+                          console.log("BUDGETTT: ", budget)
                           alert("Success!");
+                          value.refreshApiData();
                           this.props.navigation.navigate('Budget');
                         }
 
@@ -120,26 +121,20 @@ export default class AddBudget extends Component {
                   <Content padder>
                     <Card>
                       <List>
-                        <ListItem>
-                          <Body>
-                            <PickerIcon pickerItems={this.state.pickerCategory} selected={this.state.selected} onValueChange={this.onValueChange} />
-                          </Body>
-                        </ListItem>
+
                         <ListItem>
                           <Body>
                             <Text>Amount</Text>
                             <Item>
-                              <Text style={{ fontSize: 24, color: 'green' }}>$</Text>
+                              <Text style={{ fontSize: 24, color: 'green' }}>Rs</Text>
                               <Input placeholder="Tap to add amount" style={{ fontSize: 24, color: 'red' }} keyboardType={'number-pad'} onChangeText={this.handleAmount} />
                             </Item>
                           </Body>
                         </ListItem>
                         <ListItem>
                           <Body style={{ marginBottom: 10 }}>
-                            <Text>Budget balance goes to next month</Text>
+                            <Text>Budget balance goes to next month (30 days) of date: </Text>
                           </Body>
-
-                          <CheckBox checked={true} />
                         </ListItem>
                         <CardItem footer bordered>
                           <DatePicker onDateChange={this.onDateChange} />
@@ -155,7 +150,7 @@ export default class AddBudget extends Component {
                         amount: this.state.amount,
                         timeInterval: futureDate.diff(currentDate, 'days')
                       })
-                      console.log("BUDGETTT: ",budget)
+                      console.log("BUDGETTT: ", budget)
                       alert("Success!");
                       value.refreshApiData();
                       this.props.navigation.navigate('Budget');

@@ -15,13 +15,16 @@ import {
   Title,
   Icon,
   DatePicker,
-  Fab
+  Fab,
+  List
 } from "native-base";
 
 import { StoreContext } from "../context/StoreContext.js"
 
+import CardBox from './common/CardBox'
 
-import { CardInfo } from './common/CardInfo';
+
+import CardInfo from './common/CardInfo';
 import Moment from 'moment';
 
 
@@ -107,7 +110,7 @@ export default class Budget extends Component {
               </CardItem> */}
 
 
-                      {value.budget.map(item => (
+                      {/* {value.budget.map(item => (
                         <CardInfo currency='Rs. '
                           title={item.title || item.note || item.name}
                           textNote={item.textNote || ''}
@@ -116,8 +119,26 @@ export default class Budget extends Component {
                           key={item.id || 0}
                         />
                       ))
-                      }
+                      } */}
+                      <List>
 
+                        {value.budget.map(item => (
+                          <CardInfo currency='Rs. '
+                            title={item.title || item.note || item.name || item.timeInteval.toString() + ' days'}
+                            textNote={item.textNote || ''}
+                            amount={item.amount || item.balance}
+                            date={item.date || item.createdDate || Moment().format()}
+                            key={item.id || 0}
+                          />
+                        ))}
+
+                      </List>
+                      {/* <CardBox header="Budget"
+                        state={value.budget}
+
+                        data={value.budget}
+
+                      /> */}
 
                     </Card>
                   </Content>
