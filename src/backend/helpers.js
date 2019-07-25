@@ -33,6 +33,7 @@ const recordIncome = async (data) => {
 const recordBudget = async (data) => {
     try {
         const realm = await getRealm();
+        console.log(data)
         realm.write(() => {
             realm.create('Budget', data, true);
         });
@@ -92,7 +93,10 @@ const getCategoryByValue =  async (value) =>{
 const getExpenses = async () => {
     try {
         const realm = await getRealm();
-        return realm.objects('Expense').sorted('date',true);
+        let expense =  realm.objects('Expense');
+        if(expense.length > 0)
+            expense = expense.sorted('date',true)
+        return expense;
 
     } catch (e) {
         throw new Error('Get Expense Error');
@@ -171,7 +175,10 @@ const getExpenseByHighestAmount = async () => {
 const getIncomes = async (id) => {
     try {
         const realm = await getRealm();
-        return realm.objects('Income').sorted('date',true);
+        let income =  realm.objects('Income');
+        if(income.length > 0)
+            income = income.sorted('date',true)
+        return income;
 
     } catch (e) {
         throw new Error('Error');
@@ -263,12 +270,13 @@ const getBudgets = async () => {
     try {
         const realm = await getRealm();
         let budget = realm.objects('Budget');
+         console.log(budget);
         if(budget.length > 0)
-            budget = budget.sorted('date',true);
+            budget = budget.sorted('createdDate',true);
         return budget;
 
     } catch (e) {
-        throw new Error('Budget Error');
+        throw new Error('Getting Budget Error');
     }
 };
 

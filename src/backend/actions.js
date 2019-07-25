@@ -59,10 +59,9 @@ import moment from 'moment'
             id,
             amount: parseFloat(amount),
             createdDate: moment().format(),
-            timeInterval : parseFloat(timeInterval)
+            timeInteval : parseFloat(timeInterval)
         };
 
-        console.log("DATA: ",data);
         await recordBudget(data);
         return data;
 
