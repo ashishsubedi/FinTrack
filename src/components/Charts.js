@@ -42,7 +42,7 @@ const CategorySpent = [
  *  x variable stores category and y variable stores the monthly expenditure in that particular category */
 const CategoryIncome = [
   { x: "Salary", y: 30000 },
-  { x: "Rent", y: 20000 }
+  { x: "Rent", y: 20000 },
 ]
 
 
@@ -71,13 +71,13 @@ for (i = 0; i < CategoryIncome.length; i++) {
  */
 
 const weeklyData = [
-  { day: 1, expenditure: 130 },
-  { day: 2, expenditure: 165 },
-  { day: 3, expenditure: 142 },
-  { day: 4, expenditure: 190 },
-  { day: 5, expenditure: 190 },
-  { day: 6, expenditure: 190 },
-  { day: 7, expenditure: 190 },
+  { day: 1, expenditure: 780 },
+  { day: 2, expenditure: 200 },
+  { day: 3, expenditure: 500 },
+  { day: 4, expenditure: 450 },
+  { day: 5, expenditure: 600 },
+  { day: 6, expenditure: 600 },
+  { day: 7, expenditure: 40 },
 ];
 const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 const legenddata = []
@@ -92,16 +92,16 @@ const MonthlyLineData=[
   {x:4,y:450},
   {x:5,y:600},
   {x:6,y:600},
-  {x:7,y:200},
+  {x:7,y:40},
   {x:8,y:200},
   {x:9,y:900},
   {x:10,y:200},
-  {x:11,y:200},
+  {x:11,y:600},
   {x:12,y:200},
   {x:13,y:800},
-  {x:14,y:200},
+  {x:14,y:900},
   {x:15,y:200},
-  {x:16,y:200}
+  {x:16,y:70}
 ]
 
 /**This is the component to export monthly expenditure chart which is in PIE format */

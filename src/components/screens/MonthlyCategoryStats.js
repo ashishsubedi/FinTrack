@@ -22,8 +22,8 @@ export default class MonthlyCategoryStats extends Component {
   constructor(props){
     super(props);
     this.state = {
-      amount: '$0.00',
-      average: '$0.00',
+      amount: 'Rs.s0.00',
+      average: 'Rs.0.00',
       selected: 'income',
       label: 'Income',
       selected2: 'jan',

@@ -34,17 +34,7 @@ export default class Profile extends Component {
             </Right>
           </Header>
           <Content>
-            <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show Daily trends panel")}>
-                <Left style={{ margin: 10 }}>
-                  <Thumbnail style={{ width: 80, height: 80 }} source={require('../../assets/Small.png')} />
-                  <Body>
-                    <Text style={{ fontSize: 21 }}>Sign in</Text>
-                    <Text note>Help us create a better platform for you to manage your money.</Text>
-                  </Body>
-                </Left>
-              </CardItem>
-            </Card>
+            
             <Card noShadow={true}>
               <List>
                 <ListItem iconLeft button onPress={() => alert("Show Daily trends panel")}>

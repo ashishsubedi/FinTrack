@@ -82,17 +82,7 @@ export default class OneWeekExpense extends Component {
         </Header>
         <Content padder>
           <Card>
-            <List>
-              <ListItem>
-                 <Text>S</Text>
-               </ListItem>
-               <ListItem>
-                 <Text>M</Text>
-               </ListItem>
-               <ListItem>
-                 <Text>T</Text>
-               </ListItem>
-             </List>
+            
               <Weekly />
           </Card>
         </Content>

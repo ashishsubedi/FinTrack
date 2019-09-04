@@ -70,39 +70,7 @@ export default class Stats extends Component {
                 </Left>
               </CardItem>
             </Card>
-            <Card noShadow={true} >
-              <CardItem button onPress={() => this.props.navigation.navigate('AnnualCategoryStats')}>
-                <Left style={{ margin: 10 }}>
-                  <Icon name='ios-analytics' style={{ fontSize: 38, color: '#000', marginRight: 15 }} />
-                  <Body>
-                    <Text style={{ fontSize: 21 }}>Annual Category Stats</Text>
-                    <Text note>View category stats within one year </Text>
-                  </Body>
-                </Left>
-              </CardItem>
-            </Card>
-            <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show annual income and expense panel")}>
-                <Left style={{ margin: 10 }}>
-                  <Icon name='stats' style={{ fontSize: 35, color: '#000', marginRight: 15 }} />
-                  <Body>
-                    <Text style={{ fontSize: 21 }}>Annual Income/Expense stats</Text>
-                    <Text note>View monthly income & stats for one year </Text>
-                  </Body>
-                </Left>
-              </CardItem>
-            </Card>
-            <Card noShadow={true} >
-              <CardItem button onPress={() => alert("Show monthly income and stats for a category panel")}>
-                <Left style={{ margin: 10 }}>
-                  <Icon name='stats' style={{ fontSize: 35, color: '#000', marginRight: 15 }} />
-                  <Body>
-                    <Text style={{ fontSize: 21 }}>Categorical Stats</Text>
-                    <Text note>View monthly income & stats for category </Text>
-                  </Body>
-                </Left>
-              </CardItem>
-            </Card>
+           
             
           </Content>
         </ImageBackground>

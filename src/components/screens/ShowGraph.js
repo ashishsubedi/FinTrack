@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ImageBackground, View } from "react-native";
 import bgImage from '../../../assets/background.jpg';
 import { PickerIcon } from '../common';
-import { CategoryIncomeChart, CategorySpentChart, Weekly } from '../Charts';
+import { CategoryIncomeChart, CategorySpentChart, Weekly, MonthlyLine } from '../Charts';
 import {
         Container,
         Header,
@@ -22,8 +22,8 @@ export default class ShowGraph extends Component {
   constructor(props){
     super(props);
     this.state = {
-      amount: '$0.00',
-      average: '$0.00',
+      amount: 'Rs. 7030.00',
+      average: 'Rs. 440.00',
       selected: 'income',
       label: 'Income',
       selected2: 'jan',
@@ -177,7 +177,7 @@ export default class ShowGraph extends Component {
               <Text style={{ fontSize: 24, color: 'green'}}>{this.state.average}</Text>
               </Right>
             </CardItem>
-              <CategoryIncomeChart />
+              <MonthlyLine/>
           </Card>
         </Content>
         </ImageBackground>
